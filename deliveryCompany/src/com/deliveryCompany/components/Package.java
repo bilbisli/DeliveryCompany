@@ -91,6 +91,10 @@ public abstract class Package {
 		return nextId;
 	}
 	
+	public int getPackageID() {
+		return packageID;
+	}
+	
 	public Priority getPriority() {
 		return priority;
 	}
@@ -121,6 +125,10 @@ public abstract class Package {
 	
 	public Address getDestinationAddress() {
 		return destinationAddress;
+	}
+	
+	public Tracking getLastTrack() {
+		return tracking.get(tracking.size() - 1);
 	}
 	
 	protected abstract String packCharacteristics();
