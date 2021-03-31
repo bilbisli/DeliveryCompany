@@ -1,4 +1,4 @@
-package com.deliveryCompany.deliveries;
+package com.deliveryCompany.components;
 
 public class StandardPackage extends Package {
 	private double weight;

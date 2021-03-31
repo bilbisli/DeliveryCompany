@@ -1,6 +1,6 @@
-package com.deliveryCompany;
+package com.deliveryCompany.program;
 
-import com.deliveryCompany.offices.MainOffice;
+import com.deliveryCompany.components.MainOffice;
 
 public class Game {
 

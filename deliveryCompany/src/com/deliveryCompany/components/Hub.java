@@ -1,15 +1,15 @@
-package com.deliveryCompany.offices;
+package com.deliveryCompany.components;
 
 import java.util.ArrayList;
 
 public class Hub {
 	private ArrayList<Branch> branches;
 	
-	Hub() {
+	public Hub() {
 		
 	}
 	
-	void work() {
+	public void work() {
 		
 	}
 }

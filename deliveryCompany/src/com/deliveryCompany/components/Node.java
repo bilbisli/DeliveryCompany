@@ -1,4 +1,4 @@
-package com.deliveryCompany.deliveries;
+package com.deliveryCompany.components;
 
 public interface Node {
 	void collectPackage(Package p);

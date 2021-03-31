@@ -1,4 +1,4 @@
-package com.deliveryCompany.deliveries;
+package com.deliveryCompany.components;
 
 public class NonStandardPackage extends Package {
 	int width;

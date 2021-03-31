@@ -1,4 +1,4 @@
-package com.deliveryCompany.vehicles;
+package com.deliveryCompany.components;
 
 public class NonStandardTruck extends Truck {
 	private int width;

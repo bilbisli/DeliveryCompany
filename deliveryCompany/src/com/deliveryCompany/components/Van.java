@@ -1,4 +1,4 @@
-package com.deliveryCompany.vehicles;
+package com.deliveryCompany.components;
 
 public class Van extends Truck {
 	public Van() {}

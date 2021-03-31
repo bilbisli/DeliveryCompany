@@ -1,8 +1,6 @@
-package com.deliveryCompany.vehicles;
+package com.deliveryCompany.components;
 
 import java.util.ArrayList;
-
-import com.deliveryCompany.deliveries.*;
 
 public class Truck {
 	private int truckID;

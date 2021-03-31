@@ -1,9 +1,5 @@
-package com.deliveryCompany.offices;
-import com.deliveryCompany.vehicles.*;
-
+package com.deliveryCompany.components;
 import java.util.ArrayList;
-
-import com.deliveryCompany.deliveries.*;
 
 public class Branch {
 	private int branchId;

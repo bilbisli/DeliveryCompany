@@ -1,6 +1,4 @@
-package com.deliveryCompany.vehicles;
-
-import com.deliveryCompany.offices.*;
+package com.deliveryCompany.components;
 
 public class StandardTruck extends Truck {
 	private int maxWeight;

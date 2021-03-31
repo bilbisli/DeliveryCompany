@@ -1,4 +1,4 @@
-package com.deliveryCompany.deliveries;
+package com.deliveryCompany.components;
 
 public class SmallPackage extends Package {
 	private boolean acknowledge;

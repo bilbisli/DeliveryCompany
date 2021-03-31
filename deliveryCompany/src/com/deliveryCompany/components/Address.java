@@ -1,4 +1,4 @@
-package com.deliveryCompany.deliveries;
+package com.deliveryCompany.components;
 
 public class Address {
 	private int zip;
