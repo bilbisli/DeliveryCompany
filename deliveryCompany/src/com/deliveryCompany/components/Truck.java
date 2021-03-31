@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public abstract class Truck implements Node {
 	static private int nextId = 2000; 
 	private int truckID;
-	final private String licensePlate;
-	final private String truckModel;
+	private final String licensePlate;
+	private final String truckModel;
 	private boolean available;
 	private int timeLeft;
 	private ArrayList<Package> packages;
@@ -74,6 +74,10 @@ public abstract class Truck implements Node {
 	public void setPackages(ArrayList<Package> packages) {
 		this.packages = packages;
 	}
+	
+	public Package getLastPack() {
+		return packages.get(packages.size() - 1);
+	}
 
 	@Override
 	public int hashCode() {
@@ -123,14 +127,15 @@ public abstract class Truck implements Node {
 
 	@Override
 	public String toString() {
-		return "Truck [truckID=" + truckID + ", licensePlate=" + licensePlate + ", truckModel=" + truckModel
-				+ ", available=" + available + ", timeLeft=" + timeLeft + ", packages=" + packages + ", getTruckID()="
-				+ getTruckID() + ", getLicensePlate()=" + getLicensePlate() + ", getTruckModel()=" + getTruckModel()
-				+ ", isAvailable()=" + isAvailable() + ", getTimeLeft()=" + getTimeLeft() + ", getPackages()="
-				+ getPackages() + ", hashCode()=" + hashCode() + ", getClass()=" + getClass() + ", toString()="
-				+ super.toString() + "]";
+		return "Truck [truckID=" + truckID + ", licensePlate=" + licensePlate + ", truckModel=" + truckModel 
+				+ ", available=" + available + truckCharacteristics() + "]";
+		
 	}
 	
+	protected String truckCharacteristics() {
+		return "";
+	}
+
 	public String generateLicensePlate() {
 		int n = 10000000 + new Random().nextInt(100000000);
 		int temp[] = new int[8];

@@ -1,12 +1,27 @@
 package com.deliveryCompany.components;
 
+import java.util.ArrayList;
+
 public class Van extends Truck {
-	public Van() {}
+	public Van() {
+		super();
+	}
 	public Van(String licensePlate, String truckModel) {
 		super(licensePlate, truckModel);
 	}
 	
 	public void work() {
+		if(!isAvailable()) {
+			setTimeLeft(getTimeLeft()-1);
+			Package temp = getLastPack();
+			if(getTimeLeft() == 0) {
+				if(temp.getStatus() == Status.COLLECTION) {
+					temp.setStatus(Status.BRANCH_STORAGE);
+					temp.addTracking(this, Status.BRANCH_STORAGE);
+					System.out.println("");// ya mett
+				}
+			}
+		}
 		
 	}
 	
