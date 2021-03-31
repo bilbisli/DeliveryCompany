@@ -18,8 +18,7 @@ public class SmallPackage extends Package {
 
 	@Override
 	protected String packCharacteristics() {
-		// TODO Auto-generated method stub
-		return null;
+		return "acknowledge="  + acknowledge;
 	}
 
 	@Override
@@ -43,7 +42,14 @@ public class SmallPackage extends Package {
 			return false;
 		return true;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "SmallPackage [acknowledge=" + acknowledge + "]";
+	}
+	
+	@Override
+	public String getSimpleName() {
+		return "SmallPackage";
+	}
 }

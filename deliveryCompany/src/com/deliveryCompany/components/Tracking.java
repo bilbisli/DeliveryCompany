@@ -1,9 +1,10 @@
 package com.deliveryCompany.components;
 
 public class Tracking {
-	private int time;
-	private Node node;
-	private Status status;
+
+	private final int time;
+	private final Node node;
+	private final Status status;
 	
 	public Tracking(int time, Node node, Status status) {
 		this.time = time;
@@ -15,23 +16,16 @@ public class Tracking {
 		return time;
 	}
 
-	public void setTime(int time) {
-		this.time = time;
-	}
-
 	public Node getNode() {
 		return node;
-	}
-
-	public void setNode(Node node) {
-		this.node = node;
 	}
 
 	public Status getStatus() {
 		return status;
 	}
-
-	public void setStatus(Status status) {
-		this.status = status;
+	
+	@Override
+	public String toString() {
+		return time + ": " + node + ", status=" + status;
 	}
 }
