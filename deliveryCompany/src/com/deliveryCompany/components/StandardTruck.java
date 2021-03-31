@@ -11,5 +11,19 @@ public class StandardTruck extends Truck {
 		this.maxWeight = maxWeight;	
 	}
 	
-	void work() {}
+	public void work() {
+		
+	}
+
+	@Override
+	public void collectPackage(Package p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deliverPackage(Package p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

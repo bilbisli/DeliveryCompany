@@ -1,7 +1,7 @@
 package com.deliveryCompany.components;
 import java.util.ArrayList;
 
-public class Branch {
+public class Branch implements Node{
 	private int branchId;
 	private String branchName;
 	private ArrayList <Truck>   listTrucks;
@@ -14,6 +14,20 @@ public class Branch {
 		
 	}
 	
-	void work() {}
+	public void work() {
+		
+	}
+
+	@Override
+	public void collectPackage(Package p) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void deliverPackage(Package p) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

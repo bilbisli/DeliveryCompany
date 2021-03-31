@@ -5,5 +5,20 @@ public class Van extends Truck {
 	public Van(String licensePlate, String truckModel) {
 		super(licensePlate, truckModel);
 	}
-	void work() {}
+	
+	public void work() {
+		
+	}
+	
+	@Override
+	public void collectPackage(Package p) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void deliverPackage(Package p) {
+		// TODO Auto-generated method stub
+		
+	}
 }

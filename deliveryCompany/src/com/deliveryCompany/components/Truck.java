@@ -2,7 +2,7 @@ package com.deliveryCompany.components;
 import java.util.Random;
 import java.util.ArrayList;
 
-public abstract class Truck {
+public abstract class Truck implements Node {
 	static private int nextId = 2000; 
 	private int truckID;
 	final private String licensePlate;
@@ -18,7 +18,7 @@ public abstract class Truck {
 		available = true;
 		packages = new ArrayList<Package>();
 		timeLeft = 0;
-		licensePlate = pattern();
+		licensePlate = generateLicensePlate();
 	}
 	
 	public Truck(String licensePlate, String truckModel) {
@@ -29,7 +29,6 @@ public abstract class Truck {
 		truckID = nextId++;	
 		timeLeft = 0;
 	}
-	
 	
 	public int getnextId() {
 		return nextId;
@@ -132,8 +131,7 @@ public abstract class Truck {
 				+ super.toString() + "]";
 	}
 	
-	
-	public String pattern() {
+	public String generateLicensePlate() {
 		int n = 10000000 + new Random().nextInt(100000000);
 		int temp[] = new int[8];
 		int i = 0;
