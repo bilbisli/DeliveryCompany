@@ -8,4 +8,7 @@ public class Address {
 		this.zip = zip;
 		this.street = street;
 	}
+	public String addressString() {
+		return zip + "-" + street;
+	}
 }

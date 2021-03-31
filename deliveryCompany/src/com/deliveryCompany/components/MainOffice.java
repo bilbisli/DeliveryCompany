@@ -3,7 +3,7 @@ package com.deliveryCompany.components;
 import java.util.ArrayList;
 
 public class MainOffice {
-	private int clock;
+	static private int clock;
 	private Hub hub;
 	private ArrayList<Package> packages;
 	
@@ -24,5 +24,23 @@ public class MainOffice {
 	}
 	public void addPackage() {
 		
+	}
+	public Hub getHub() {
+		return hub;
+	}
+	public void setHub(Hub hub) {
+		this.hub = hub;
+	}
+	public ArrayList<Package> getPackages() {
+		return packages;
+	}
+	public void setPackages(ArrayList<Package> packages) {
+		this.packages = packages;
+	}
+	public static int getClock() {
+		return clock;
+	}
+	public static void setClock(int clock) {
+		MainOffice.clock = clock;
 	}
 }
