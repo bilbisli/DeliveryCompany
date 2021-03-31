@@ -91,6 +91,10 @@ public abstract class Package {
 		return nextId;
 	}
 	
+	public int getPackageID() {
+		return packageID;
+	}
+	
 	public Priority getPriority() {
 		return priority;
 	}
