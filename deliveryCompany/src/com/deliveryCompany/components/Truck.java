@@ -127,7 +127,7 @@ public abstract class Truck implements Node {
 
 	@Override
 	public String toString() {
-		return "Truck [truckID=" + truckID + ", licensePlate=" + licensePlate + ", truckModel=" + truckModel 
+		return "[truckID=" + truckID + ", licensePlate=" + licensePlate + ", truckModel=" + truckModel 
 				+ ", available=" + available + truckCharacteristics() + "]";
 		
 	}

@@ -16,10 +16,13 @@ public class Van extends Truck {
 			Package temp = getLastPack();
 			if(getTimeLeft() == 0) {
 				if(temp.getStatus() == Status.COLLECTION) {
-					temp.setStatus(Status.BRANCH_STORAGE);
-					temp.addTracking(this, Status.BRANCH_STORAGE);
-					System.out.println("");// ya mett
+					collectPackage(temp);
 				}
+				if(temp.getStatus() == Status.DISTRIBUTION) {
+					deliverPackage(temp);
+
+				}
+				
 			}
 		}
 		
@@ -27,13 +30,29 @@ public class Van extends Truck {
 	
 	@Override
 	public void collectPackage(Package p) {
-		// TODO Auto-generated method stub
+		p.setStatus(Status.BRANCH_STORAGE);
+		p.addTracking(this, Status.BRANCH_STORAGE);
+		System.out.println("Van %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackgeID(),);
+		this.setAvailable(true);
 		
 	}
 	
 	@Override
 	public void deliverPackage(Package p) {
-		// TODO Auto-generated method stub
+		p.setStatus(Status.DELIVERED);
+		p.addTracking(this, Status.DELIVERED);
+		System.out.println("Van %d has delivered package %d to the destination", getTruckID(), p.getPackgeID());
+		if(p instanceof SmallPackage ) {
+			if(((SmallPackage) p).isAcknowledge()) {
+				System.out.println("Van %d has delivered package %d to the destination", getTruckID(), p.getPackgeID());
+			}
+		}	
+		getPackages().remove(p);
 		
 	}
+	@Override
+	public String toString() {
+		return "Van " + super.toString();
+	}
+	
 }
