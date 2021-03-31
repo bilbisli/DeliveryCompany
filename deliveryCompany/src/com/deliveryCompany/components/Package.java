@@ -123,5 +123,9 @@ public abstract class Package {
 		return destinationAddress;
 	}
 	
+	public Tracking getLastTrack() {
+		return tracking.get(tracking.size() - 1);
+	}
+	
 	protected abstract String packCharacteristics();
 }
