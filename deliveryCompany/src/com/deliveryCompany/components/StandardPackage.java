@@ -7,6 +7,12 @@ public class StandardPackage extends Package {
 		super(priority, senderAddress, destinationAddress);
 		this.weight = weight;
 	}
+
+	@Override
+	protected String packCharacteristics() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 }
