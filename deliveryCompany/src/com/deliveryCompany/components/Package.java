@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public abstract class Package {
 	private static int nextId = 1000;
-	final private int packageID;
+	private final int packageID;
 	private Priority priority;
 	private Status status;
-	final private Address senderAddress;
-	final private Address destinationAddress;
+	private final Address senderAddress;
+	private final Address destinationAddress;
 	private ArrayList<Tracking> tracking;
 	
 	public Package (Priority priority, Address senderAddress, Address destinationAddress) {
@@ -19,25 +19,28 @@ public abstract class Package {
 		tracking = new ArrayList<Tracking>();
 		addTracking(null, Status.CREATION);
 	}
+	
 	public void addTracking (Node node, Status status) {
 		tracking.add(new Tracking(MainOffice.getClock(), node, status));
 	}
+	
 	public void printTracking() {
-		System.out.printf(toString());
-		for (Tracking track : tracking) {
+		System.out.println("TRACKING " + getSimpleName() + " " + toString());
+		for (Tracking track : tracking)
 			System.out.println(track);
-		}
 	}
+	
 	@Override
 	public String toString() {
-		return String.format("[TRACKING %s [packageID=%d, priority=%s. status=%s, startTime=%s, senderAddress=%s, "
-				+ "destinationAddress=%s, %s]",
-				packageName(), packageID, priority, status, tracking.get(0).getTime(), senderAddress.addressString(), 
+		return String.format("[packageID=%d, priority=%s. status=%s, startTime=%s, senderAddress=%s, destinationAddress=%s, %s]",
+				packageID, priority, status, tracking.get(0).getTime(), senderAddress.addressString(), 
 				destinationAddress.addressString(), packCharacteristics());
 	}
-	public String packageName() {
+	
+	public String getSimpleName() {
 		return "Package";
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -50,6 +53,7 @@ public abstract class Package {
 		result = prime * result + ((tracking == null) ? 0 : tracking.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -82,6 +86,7 @@ public abstract class Package {
 			return false;
 		return true;
 	}
+	
 	public static int getNextId() {
 		return nextId;
 	}
@@ -89,26 +94,34 @@ public abstract class Package {
 	public Priority getPriority() {
 		return priority;
 	}
+	
 	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
+	
 	public Status getStatus() {
 		return status;
 	}
+	
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+	
 	public ArrayList<Tracking> getTracking() {
 		return tracking;
 	}
+	
 	public void setTracking(ArrayList<Tracking> tracking) {
 		this.tracking = tracking;
 	}
+	
 	public Address getSenderAddress() {
 		return senderAddress;
 	}
+	
 	public Address getDestinationAddress() {
 		return destinationAddress;
 	}
+	
 	protected abstract String packCharacteristics();
 }
