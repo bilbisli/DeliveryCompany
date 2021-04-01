@@ -1,5 +1,6 @@
 package com.deliveryCompany.components;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Branch implements Node {
 	private static int nextId = -1; 
@@ -28,6 +29,7 @@ public class Branch implements Node {
 			case BRANCH_STORAGE:
 				if (!pack.getLastTrack().getNode().equals(this))
 					pack.addTracking(this, Status.BRANCH_STORAGE);
+				
 				break;
 			case CREATION:
 				collectPackage(pack);
@@ -39,6 +41,15 @@ public class Branch implements Node {
 				break;
 			}
 		}
+	}
+	
+	public int calcRouteTime(Package p) {
+		
+		return calcRouteTime(p.getSenderAddress(), p.getDestinationAddress());
+	}
+	
+	public int calcRouteTime(Address sender, Address destination) {
+		
 	}
 
 	@Override
@@ -65,8 +76,6 @@ public class Branch implements Node {
 				listPackages.remove(p);
 			}
 	}
-	
-	
 	
 	@Override
 	public int hashCode() {
@@ -144,6 +153,46 @@ public class Branch implements Node {
 
 	public int getBranchId() {
 		return branchId;
+	}
+	
+	public void addPackage(int index, Package p) {
+		listPackages.add(index, p);
+	}
+	
+	public void addPackage(Package p) {
+		listPackages.add(p);
+	}
+	
+	public void addPackages(Object packs) {
+		listPackages.addAll((ArrayList<Package>) packs);
+	}
+	
+	public void addPackages(int index, Object packs) {
+		listPackages.addAll(index, (ArrayList<Package>) packs);
+	}
+	
+	public void removePackage(int index) {
+		listPackages.remove(index);
+	}
+	
+	public void removePackage(Package p) {
+		listPackages.remove(p);
+	}
+	
+	public void addTruck(int index, Truck t) {
+		listTrucks.add(index, t);
+	}
+	
+	public void addTruck(Truck t) {
+		listTrucks.add(t);
+	}
+	
+	public void removeTruck(int index) {
+		listTrucks.remove(index);
+	}
+	
+	public void removeTruck(Truck t) {
+		listTrucks.remove(t);
 	}
 
 	public String getSimpleName() {
