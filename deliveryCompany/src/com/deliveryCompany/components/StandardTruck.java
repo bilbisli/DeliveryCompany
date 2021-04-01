@@ -74,7 +74,8 @@ public class StandardTruck extends Truck {
 					for (Package pack : destination.getListPackages()) {
 						if (pack.getStatus() == Status.BRANCH_STORAGE) {
 							destination.checkAddTrack(pack);
-							checkCapacityAdd(pack, currentWeight, Status.HUB_TRANSPORT);
+							if(!checkCapacityAdd(pack, currentWeight, Status.HUB_TRANSPORT))
+								break;
 						}
 					}
 					Random rand = new Random();
