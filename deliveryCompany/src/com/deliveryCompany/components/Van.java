@@ -43,7 +43,8 @@ public class Van extends Truck {
 			if(((SmallPackage) p).isAcknowledge()) {
 				System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 			}
-		}	
+		}
+		this.setAvailable(true);
 		removePackage(p);
 	}
 	

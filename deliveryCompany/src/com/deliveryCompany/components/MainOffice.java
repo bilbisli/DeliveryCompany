@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class MainOffice {
 	static private int clock;
-	private Hub hub;
+	private static Hub hub;
 	private ArrayList<Package> packages;
 	
 	public MainOffice(int branches, int trucksForBranch) {
@@ -25,11 +25,11 @@ public class MainOffice {
 	public void addPackage() {
 		
 	}
-	public Hub getHub() {
+	public static Hub getHub() {
 		return hub;
 	}
 	public void setHub(Hub hub) {
-		this.hub = hub;
+		MainOffice.hub = hub;
 	}
 	public ArrayList<Package> getPackages() {
 		return packages;
