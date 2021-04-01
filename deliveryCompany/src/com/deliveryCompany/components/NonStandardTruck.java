@@ -29,6 +29,9 @@ public class NonStandardTruck extends Truck {
 			Package temp = getLastPack();
 			if(getTimeLeft() == 0) {
 				if(temp.getStatus() == Status.COLLECTION) {
+					int temptime = ((Math.abs(getLastPack().getSenderAddress().getStreet()
+							- getLastPack().getDestinationAddress().getStreet()) / 10) % 10) + 1;
+					setTimeLeft(temptime);
 					collectPackage(temp);
 					
 				}
@@ -50,15 +53,42 @@ public class NonStandardTruck extends Truck {
 	}
 
 	@Override
+	public void deliverPackage(Package p) {
+		p.setStatus(Status.DELIVERED);
+		System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
+		if(p instanceof SmallPackage ) {
+			if(((SmallPackage) p).isAcknowledge()) {
+				System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
+			}
+		}	
+		removePackage(p);
+		
+	}
+	
+
+
+	@Override
 	public String toString() {
-		return "NonStandardTruck [width=" + width + ", length=" + length + ", height=" + height + ", getWidth()="
-				+ getWidth() + ", getLength()=" + getLength() + ", getHeight()=" + getHeight() + ", getnextId()="
-				+ getnextId() + ", getTruckID()=" + getTruckID() + ", getLicensePlate()=" + getLicensePlate()
-				+ ", getTruckModel()=" + getTruckModel() + ", isAvailable()=" + isAvailable() + ", getTimeLeft()="
-				+ getTimeLeft() + ", getPackages()=" + getPackages() + ", getLastPack()=" + getLastPack()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + ", truckCharacteristics()="
-				+ truckCharacteristics() + ", generateLicensePlate()=" + generateLicensePlate() + ", getClass()="
-				+ getClass() + "]";
+		return "NonStandardTruck [width=" + width + ", length=" + length + ", height=" + height + "]";
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NonStandardTruck other = (NonStandardTruck) obj;
+		if (height != other.height)
+			return false;
+		if (length != other.length)
+			return false;
+		if (width != other.width)
+			return false;
+		return true;
 	}
 
 	public int getWidth() {
@@ -85,17 +115,5 @@ public class NonStandardTruck extends Truck {
 		this.height = height;
 	}
 
-	@Override
-	public void deliverPackage(Package p) {
-		p.setStatus(Status.DELIVERED);
-		System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
-		if(p instanceof SmallPackage ) {
-			if(((SmallPackage) p).isAcknowledge()) {
-				System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
-			}
-		}	
-		removePackage(p);
-		
-	}
 
 }
