@@ -79,6 +79,14 @@ public abstract class Truck implements Node {
 		return packages.get(packages.size() - 1);
 	}
 	
+	public void addPackage(int index, Package p) {
+		packages.add(index, p);
+	}
+	
+	public void addPackage(Package p) {
+		packages.add(p);
+	}
+	
 	public void removePackage(int index) {
 		packages.remove(index);
 	}

@@ -21,21 +21,52 @@ public class Branch implements Node {
 	}
 	
 	public void work() {
-		
+		for (Truck truck : listTrucks)
+			truck.work();
+		for (Package pack : listPackages) {
+			switch (pack.getStatus()) {
+			case BRANCH_STORAGE:
+				if (!pack.getLastTrack().getNode().equals(this))
+					pack.addTracking(this, Status.BRANCH_STORAGE);
+				break;
+			case CREATION:
+				collectPackage(pack);
+				break;
+			case DELIVERY:
+				deliverPackage(pack);
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	@Override
 	public void collectPackage(Package p) {
-		// TODO Auto-generated method stub
-		//	p.addTracking(this, Status.DELIVERED);
-		
+		for (Truck truck : listTrucks)
+			if (truck.isAvailable())
+			{
+				truck.setAvailable(false);
+				truck.addPackage(p);
+				p.setStatus(Status.COLLECTION);
+				p.addTracking(truck, Status.COLLECTION);
+			}
 	}
 
 	@Override
 	public void deliverPackage(Package p) {
-		// TODO Auto-generated method stub
-		
+		for (Truck truck : listTrucks)
+			if (truck.isAvailable())
+			{
+				truck.setAvailable(false);
+				truck.addPackage(p);
+				p.setStatus(Status.DISTRIBUTION);
+				p.addTracking(truck, Status.DISTRIBUTION);
+				listPackages.remove(p);
+			}
 	}
+	
+	
 	
 	@Override
 	public int hashCode() {
