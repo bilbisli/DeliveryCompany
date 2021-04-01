@@ -78,6 +78,14 @@ public abstract class Truck implements Node {
 	public Package getLastPack() {
 		return packages.get(packages.size() - 1);
 	}
+	
+	public void removePackage(int index) {
+		packages.remove(index);
+	}
+	
+	public void removePackage(Package p) {
+		packages.remove(p);
+	}
 
 	@Override
 	public int hashCode() {

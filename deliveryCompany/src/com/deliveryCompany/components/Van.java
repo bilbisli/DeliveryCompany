@@ -6,6 +6,7 @@ public class Van extends Truck {
 	public Van() {
 		super();
 	}
+	
 	public Van(String licensePlate, String truckModel) {
 		super(licensePlate, truckModel);
 	}
@@ -29,27 +30,25 @@ public class Van extends Truck {
 	public void collectPackage(Package p) {
 		p.setStatus(Status.BRANCH_STORAGE);
 		p.addTracking(this, Status.BRANCH_STORAGE);
-		System.out.printf("Van %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(), 0);
+		System.out.printf("Van %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(),
+				p.getDestinationAddress().getZip());
 		this.setAvailable(true);
-		
 	}
 	
 	@Override
 	public void deliverPackage(Package p) {
 		p.setStatus(Status.DELIVERED);
-		p.addTracking(this, Status.DELIVERED);
 		System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 		if(p instanceof SmallPackage ) {
 			if(((SmallPackage) p).isAcknowledge()) {
 				System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 			}
 		}	
-		getPackages().remove(p);
-		
+		removePackage(p);
 	}
+	
 	@Override
 	public String toString() {
 		return "Van " + super.toString();
 	}
-	
 }
