@@ -87,12 +87,24 @@ public abstract class Truck implements Node {
 		packages.add(p);
 	}
 	
+	public void addPackages(Object packs) {
+		packages.addAll((ArrayList<Package>) packs);
+	}
+	
+	public void addPackages(int index, Object packs) {
+		packages.addAll(index, (ArrayList<Package>) packs);
+	}
+	
 	public void removePackage(int index) {
 		packages.remove(index);
 	}
 	
 	public void removePackage(Package p) {
 		packages.remove(p);
+	}
+	
+	public void removePackages() {
+		packages.clear();
 	}
 
 	@Override
