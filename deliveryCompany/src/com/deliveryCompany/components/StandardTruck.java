@@ -13,6 +13,41 @@ public class StandardTruck extends Truck {
 		
 	}
 	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		StandardTruck other = (StandardTruck) obj;
+		if (destination == null) {
+			if (other.destination != null)
+				return false;
+		} else if (!destination.equals(other.destination))
+			return false;
+		if (maxWeight != other.maxWeight)
+			return false;
+		return true;
+	}
+
+	public int getMaxWeight() {
+		return maxWeight;
+	}
+
+	public void setMaxWeight(int maxWeight) {
+		this.maxWeight = maxWeight;
+	}
+
+	public Branch getDestination() {
+		return destination;
+	}
+
+	public void setDestination(Branch destination) {
+		this.destination = destination;
+	}
+
 	public StandardTruck(String licensePlate,String truckModel,int maxWeight) {
 		super(licensePlate, truckModel);
 		this.maxWeight = maxWeight;
@@ -22,33 +57,29 @@ public class StandardTruck extends Truck {
 	public void work() {
 		if(!isAvailable()) {
 			setTimeLeft(getTimeLeft()-1);
-			Package temp = getLastPack();
 			if(getTimeLeft() == 0) {
-				if(temp.getStatus() == Status.COLLECTION) {
-					collectPackage(temp);
+				for(Package pack : getPackages()) {
+					if(pack.getStatus() == Status.COLLECTION) {
+						System.out.printf("StandardTruck %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(),
+								pack.getDestinationAddress().getZip());
+						collectPackage(pack);
+					}
+					else{
+						deliverPackage(pack);
+					}
 				}
-				else{
-					deliverPackage(temp);
-				}
+				
 			}
+			setAvailable(true);
 		}
+
 	}
 	
 
 	@Override
 	public void collectPackage(Package p) {
-		p.setStatus(Status.BRANCH_STORAGE);
-		p.addTracking(this, Status.BRANCH_STORAGE);
-		System.out.printf("StandardTruck %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(),
-				p.getDestinationAddress().getZip());
-		this.setAvailable(true);		
-	}
-
-	@Override
-	public void deliverPackage(Package p) {
 		p.setStatus(Status.HUB_TRANSPORT);
 		p.addTracking(this, Status.HUB_TRANSPORT);
-		System.out.printf("StandardTruck %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 		Random rand = new Random();
 		this.setTimeLeft(rand.nextInt(7));
 		System.out.printf("StandardTruck %d is on it's way to the HUB, time to arrive: %d", getTruckID(),
@@ -64,12 +95,21 @@ public class StandardTruck extends Truck {
 			if(sum <= maxWeight) {
 				this.addPackage(pack);
 			}
-		} 
-		
+		}
+	}
+
+	@Override
+	public void deliverPackage(Package p) {
+		System.out.printf("StandardTruck %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
+		p.addTracking(destination, Status.DELIVERY);
+		p.setStatus(Status.DELIVERY);
+		destination.addPackages(p);
+		removePackage(p);
 	}
 
 	@Override
 	public String toString() {
 		return "StandardTruck [maxWeight=" + maxWeight + ", destination=" + destination + super.toString();
 	}
+	
 }
