@@ -44,8 +44,8 @@ public class NonStandardTruck extends Truck {
 
 	@Override
 	public void collectPackage(Package p) {
-		p.setStatus(Status.BRANCH_STORAGE);
-		p.addTracking(this, Status.BRANCH_STORAGE);
+		p.setStatus(Status.DISTRIBUTION);
+		p.addTracking(this, Status.DISTRIBUTION);
 		System.out.printf("NonStandardTruck %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(),
 				p.getDestinationAddress().getZip());
 		this.setAvailable(true);

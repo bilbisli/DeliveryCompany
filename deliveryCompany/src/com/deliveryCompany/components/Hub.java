@@ -37,15 +37,14 @@ public class Hub extends Branch {
 							NonStandardPackage p = (NonStandardPackage)pack;
 							if (p.getStatus() == Status.CREATION && p.getHeight() <= t.getHeight() 
 									&& p.getLength() <= t.getLength() && p.getWidth() <= t.getWidth()) {
-								
+								p.setStatus(Status.COLLECTION);
+								p.addTracking(t, Status.COLLECTION);
 								t.addPackage(p);
 							}
-								
 						}
 					}
 				}
 			}
-			
 		}
 	}
 	
