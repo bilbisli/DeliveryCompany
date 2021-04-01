@@ -20,19 +20,16 @@ public class Van extends Truck {
 				}
 				if(temp.getStatus() == Status.DISTRIBUTION) {
 					deliverPackage(temp);
-
 				}
-				
 			}
 		}
-		
 	}
 	
 	@Override
 	public void collectPackage(Package p) {
 		p.setStatus(Status.BRANCH_STORAGE);
 		p.addTracking(this, Status.BRANCH_STORAGE);
-		System.out.println("Van %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackgeID(),);
+		System.out.printf("Van %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(), 0);
 		this.setAvailable(true);
 		
 	}
@@ -41,10 +38,10 @@ public class Van extends Truck {
 	public void deliverPackage(Package p) {
 		p.setStatus(Status.DELIVERED);
 		p.addTracking(this, Status.DELIVERED);
-		System.out.println("Van %d has delivered package %d to the destination", getTruckID(), p.getPackgeID());
+		System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 		if(p instanceof SmallPackage ) {
 			if(((SmallPackage) p).isAcknowledge()) {
-				System.out.println("Van %d has delivered package %d to the destination", getTruckID(), p.getPackgeID());
+				System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 			}
 		}	
 		getPackages().remove(p);

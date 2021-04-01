@@ -43,12 +43,6 @@ public class SmallPackage extends Package {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "SmallPackage [acknowledge=" + acknowledge + "]";
-	}
-	
-	@Override
 	public String getSimpleName() {
 		return "SmallPackage";
 	}
