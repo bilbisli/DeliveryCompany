@@ -59,57 +59,65 @@ public class StandardTruck extends Truck {
 			setTimeLeft(getTimeLeft()-1);
 			if(getTimeLeft() == 0) {
 				for(Package pack : getPackages()) {
-					if(pack.getStatus() == Status.COLLECTION) {
-						System.out.printf("StandardTruck %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(),
-								pack.getDestinationAddress().getZip());
-						collectPackage(pack);
-					}
-					else{
-						deliverPackage(pack);
-					}
+					if(pack.getStatus() == Status.BRANCH_TRANSPORT)
+						pack.setStatus(Status.DELIVERY);
+					else if(pack.getStatus() == Status.HUB_TRANSPORT)
+						pack.setStatus(Status.HUB_STORAGE);
+					deliverPackage(pack);
 				}
 				
+				if (destination instanceof Hub)
+					setAvailable(true);
+				else
+				{
+					int currentWeight = 0;
+					for (Package pack : destination.getListPackages()) {
+						if (pack.getStatus() == Status.BRANCH_STORAGE) {
+							destination.checkAddTrack(pack);
+							checkCapacityAdd(pack, currentWeight, Status.HUB_TRANSPORT);
+						}
+					}
+					Random rand = new Random();
+					setTimeLeft(rand.nextInt(7));
+					setDestination(MainOffice.getHub());
+				}
+				System.out.printf("StandardTruck %d is on it's way to the %s, time to arrive: %d", getTruckID(),
+						destination.getBranchName(), getTimeLeft());
 			}
-			setAvailable(true);
 		}
 
 	}
-	
 
 	@Override
 	public void collectPackage(Package p) {
-		p.setStatus(Status.HUB_TRANSPORT);
-		p.addTracking(this, Status.HUB_TRANSPORT);
-		Random rand = new Random();
-		this.setTimeLeft(rand.nextInt(7));
-		System.out.printf("StandardTruck %d is on it's way to the HUB, time to arrive: %d", getTruckID(),
-				p.getDestinationAddress().getZip());
-		int sum = 0;
-		for(Package pack : getPackages()) {
-			if(pack instanceof SmallPackage ) {
-				sum += 1;
-			}
-			else if(pack instanceof StandardPackage ) {
-				sum += ((StandardPackage)pack).getWeight();
-			}
-			if(sum <= maxWeight) {
-				this.addPackage(pack);
-			}
-		}
+		p.addTracking(this, p.getStatus());
+		addPackage(p);
 	}
 
 	@Override
 	public void deliverPackage(Package p) {
-		System.out.printf("StandardTruck %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
-		p.addTracking(destination, Status.DELIVERY);
-		p.setStatus(Status.DELIVERY);
+		p.addTracking(destination, p.getStatus());
 		destination.addPackages(p);
 		removePackage(p);
 	}
 
+	public boolean checkCapacityAdd(Package p, int currentWeight, Status status) {
+		double temp;
+		
+		if (p instanceof SmallPackage && (1 + currentWeight <= getMaxWeight())) 
+				temp = 1;
+		else if (p instanceof StandardPackage && (((StandardPackage)p).getWeight() + currentWeight) <= getMaxWeight())
+			temp = ((StandardPackage)p).getWeight();
+		else return false;
+		currentWeight += temp;
+		p.setStatus(status);
+		collectPackage(p);
+		return true;
+	}
+
 	@Override
 	public String toString() {
-		return "StandardTruck [maxWeight=" + maxWeight + ", destination=" + destination + super.toString();
+		return "StandardTruck" + super.toString();
 	}
 	
 }

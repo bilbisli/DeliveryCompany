@@ -1,6 +1,6 @@
 package com.deliveryCompany.components;
+
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Branch implements Node {
 	private static int nextId = -1; 
@@ -27,9 +27,7 @@ public class Branch implements Node {
 		for (Package pack : listPackages) {
 			switch (pack.getStatus()) {
 			case BRANCH_STORAGE:
-				if (!pack.getLastTrack().getNode().equals(this))
-					pack.addTracking(this, Status.BRANCH_STORAGE);
-				
+				checkAddTrack(pack);
 				break;
 			case CREATION:
 				collectPackage(pack);
@@ -43,37 +41,36 @@ public class Branch implements Node {
 		}
 	}
 	
-	public int calcRouteTime(Package p) {
-		
-		return calcRouteTime(p.getSenderAddress(), p.getDestinationAddress());
-	}
-	
-	public int calcRouteTime(Address sender, Address destination) {
-		
+	public int calcRouteTime(Address address) {
+		return (address.getStreet() / 10) % 10 + 1;
 	}
 
 	@Override
 	public void collectPackage(Package p) {
-		for (Truck truck : listTrucks)
-			if (truck.isAvailable())
-			{
-				truck.setAvailable(false);
-				truck.addPackage(p);
-				p.setStatus(Status.COLLECTION);
-				p.addTracking(truck, Status.COLLECTION);
-			}
+			checkMovePackage(p, Status.DISTRIBUTION, p.getSenderAddress(), false);
 	}
 
 	@Override
 	public void deliverPackage(Package p) {
+			checkMovePackage(p, Status.DISTRIBUTION, p.getDestinationAddress(), true);
+	}
+	
+	public void checkAddTrack(Package pack) {
+		if (!pack.getLastTrack().getNode().equals(this))
+			pack.addTracking(this, Status.BRANCH_STORAGE);
+	}
+	
+	public void checkMovePackage(Package p, Status status, Address address, boolean remove) {
 		for (Truck truck : listTrucks)
 			if (truck.isAvailable())
 			{
+				p.setStatus(status);
+				p.addTracking(truck, status);
 				truck.setAvailable(false);
 				truck.addPackage(p);
-				p.setStatus(Status.DISTRIBUTION);
-				p.addTracking(truck, Status.DISTRIBUTION);
-				listPackages.remove(p);
+				truck.setTimeLeft(calcRouteTime(address));
+				if (remove)
+					removePackage(p);
 			}
 	}
 	
@@ -198,5 +195,4 @@ public class Branch implements Node {
 	public String getSimpleName() {
 		return "Branch";
 	}
-	
 }
