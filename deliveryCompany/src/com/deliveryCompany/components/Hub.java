@@ -91,7 +91,22 @@ public class Hub extends Branch {
 		this.branches = branches;
 	}
 
+	public void addBranch() {
+		branches.add(new Branch());
+	}
 	
+	public void addBranch(String branchName) {
+		branches.add(new Branch(branchName));
+	}
+	
+	public void addTruck() {
+		super.addTruck(new StandardTruck());
+	}
+	
+	public void addTrucks(int amount) {
+		for (int i = 0; i < amount; ++i)
+			addTruck(new StandardTruck());
+	}
 }
 
 

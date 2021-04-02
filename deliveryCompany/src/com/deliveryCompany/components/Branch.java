@@ -184,6 +184,11 @@ public class Branch implements Node {
 		listTrucks.add(t);
 	}
 	
+	public void addTrucks(int amount) {
+		for (int i = 0; i < amount; ++i)
+			addTruck(new Van());
+	}
+	
 	public void removeTruck(int index) {
 		listTrucks.remove(index);
 	}

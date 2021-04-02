@@ -3,12 +3,20 @@ package com.deliveryCompany.components;
 import java.util.ArrayList;
 
 public class MainOffice {
-	static private int clock;
+	private static int clock;
 	private static Hub hub;
 	private ArrayList<Package> packages;
 	
 	public MainOffice(int branches, int trucksForBranch) {
-
+		hub = new Hub();
+		packages = new ArrayList<Package>();
+		hub.addTrucks(trucksForBranch);
+		hub.addTruck(new NonStandardTruck());
+		for (int i = 0; i < branches; ++i) {
+			hub.addBranch();
+			hub.getBranch(i).addTrucks(trucksForBranch);
+		}
+		
 	}
 	public void play(int playTime) {
 		
