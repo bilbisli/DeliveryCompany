@@ -25,19 +25,12 @@ public class Branch implements Node {
 		for (Truck truck : listTrucks)
 			truck.work();
 		for (Package pack : listPackages) {
-			switch (pack.getStatus()) {
-			case BRANCH_STORAGE:
+			if (pack.getStatus() == Status.BRANCH_STORAGE)
 				checkAddTrack(pack);
-				break;
-			case CREATION:
+			else if (pack.getStatus() == Status.CREATION)
 				collectPackage(pack);
-				break;
-			case DELIVERY:
+			else if (pack.getStatus() == Status.DELIVERY)
 				deliverPackage(pack);
-				break;
-			default:
-				break;
-			}
 		}
 	}
 	
@@ -47,7 +40,7 @@ public class Branch implements Node {
 
 	@Override
 	public void collectPackage(Package p) {
-			checkMovePackage(p, Status.DISTRIBUTION, p.getSenderAddress(), false);
+			checkMovePackage(p, Status.COLLECTION, p.getSenderAddress(), false);
 	}
 
 	@Override

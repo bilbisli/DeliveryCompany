@@ -14,6 +14,8 @@ public class Hub extends Branch {
 	}
 	
 	public void work() {
+		for (Branch branch : branches)
+			branch.work();
 		for (Truck truck : getListTrucks()) {
 			truck.work();
 			if (truck.isAvailable()) {
