@@ -13,10 +13,10 @@ public class MainOffice {
 		hub.addTrucks(trucksForBranch);
 		hub.addTruck(new NonStandardTruck());
 		for (int i = 0; i < branches; ++i) {
-			hub.addBranch();
-			hub.getBranch(i).addTrucks(trucksForBranch);
+			Branch b = new Branch();
+			b.addTrucks(trucksForBranch);
+			hub.addBranch(b);
 		}
-		
 	}
 	public void play(int playTime) {
 		

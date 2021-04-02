@@ -99,6 +99,10 @@ public class Hub extends Branch {
 		branches.add(new Branch(branchName));
 	}
 	
+	public void addBranch(Branch branch) {
+		branches.add(branch);
+	}
+	
 	public void addTruck() {
 		super.addTruck(new StandardTruck());
 	}
