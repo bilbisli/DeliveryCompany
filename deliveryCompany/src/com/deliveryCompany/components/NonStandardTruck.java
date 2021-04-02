@@ -46,8 +46,8 @@ public class NonStandardTruck extends Truck {
 	public void collectPackage(Package p) {
 		p.setStatus(Status.DISTRIBUTION);
 		p.addTracking(this, Status.DISTRIBUTION);
-		System.out.printf("NonStandardTruck %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(),
-				p.getDestinationAddress().getZip());
+		System.out.printf("NonStandartTruck %d is collecting package %d, time left: %d", getTruckID(), p.getPackageID(),
+				getTimeLeft());
 		this.setAvailable(true);
 		
 	}
@@ -55,10 +55,10 @@ public class NonStandardTruck extends Truck {
 	@Override
 	public void deliverPackage(Package p) {
 		p.setStatus(Status.DELIVERED);
-		System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
+		System.out.printf("NonStandardTruck %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 		if(p instanceof SmallPackage ) {
 			if(((SmallPackage) p).isAcknowledge()) {
-				System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
+				System.out.printf("NonStandardTruck %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 			}
 		}	
 		removePackage(p);
