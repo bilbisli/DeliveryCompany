@@ -10,6 +10,7 @@ public class NonStandardPackage extends Package {
 		this.width = width;
 		this.length = length;
 		this.height = height;
+		System.out.println("Creating " + toString());
 	}
 
 	public int getWidth() {

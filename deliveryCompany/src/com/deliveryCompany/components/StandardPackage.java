@@ -6,6 +6,7 @@ public class StandardPackage extends Package {
 	public StandardPackage(Priority priority, Address senderAddress, Address destinationAddress, double weight) {
 		super(priority, senderAddress, destinationAddress);
 		this.weight = weight;
+		System.out.println("Creating " + toString());
 	}
 	
 	public double getWeight() {
@@ -40,12 +41,7 @@ public class StandardPackage extends Package {
 	protected String packCharacteristics() {
 		return "weight=" + weight;
 	}
-	
-	@Override
-	public String toString() {
-		return getSimpleName() + " " + super.toString();
-	}
-	
+
 	public String getSimpleName() {
 		return "StandardPackage";
 	}

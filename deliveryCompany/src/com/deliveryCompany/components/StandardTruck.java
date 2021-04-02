@@ -9,8 +9,16 @@ public class StandardTruck extends Truck {
 	public StandardTruck () {
 		super();
 		maxWeight = 70;
-		destination = null;
+		destination = MainOffice.getHub();
+		System.out.println("Creating " + toString());
 		
+	}
+
+	public StandardTruck(String licensePlate,String truckModel,int maxWeight) {
+		super(licensePlate, truckModel);
+		this.maxWeight = maxWeight;
+		destination = null;
+		System.out.println("Creating " + toString());
 	}
 	
 	@Override
@@ -47,17 +55,12 @@ public class StandardTruck extends Truck {
 	public void setDestination(Branch destination) {
 		this.destination = destination;
 	}
-
-	public StandardTruck(String licensePlate,String truckModel,int maxWeight) {
-		super(licensePlate, truckModel);
-		this.maxWeight = maxWeight;
-		destination = null;
-	}
 	
 	public void work() {
 		if(!isAvailable()) {
 			setTimeLeft(getTimeLeft()-1);
 			if(getTimeLeft() == 0) {
+				System.out.printf("StandardTruck %d loaded packages at %s\n", getTruckID(), destination.getBranchName());
 				for(Package pack : getPackages()) {
 					if(pack.getStatus() == Status.BRANCH_TRANSPORT)
 						pack.setStatus(Status.DELIVERY);
@@ -65,7 +68,7 @@ public class StandardTruck extends Truck {
 						pack.setStatus(Status.HUB_STORAGE);
 					deliverPackage(pack);
 				}
-				
+				getPackages().clear();
 				if (destination instanceof Hub)
 					setAvailable(true);
 				else
@@ -82,7 +85,7 @@ public class StandardTruck extends Truck {
 					setTimeLeft(rand.nextInt(7));
 					setDestination(MainOffice.getHub());
 				}
-				System.out.printf("StandardTruck %d is on it's way to the %s, time to arrive: %d", getTruckID(),
+				System.out.printf("StandardTruck %d is on it's way to the %s, time to arrive: %d\n", getTruckID(),
 						destination.getBranchName(), getTimeLeft());
 			}
 		}
@@ -97,9 +100,9 @@ public class StandardTruck extends Truck {
 
 	@Override
 	public void deliverPackage(Package p) {
+		System.out.printf("StandardTruck %d arrived to Branch %d\n", getTruckID(), destination.getBranchId());
 		p.addTracking(destination, p.getStatus());
-		destination.addPackages(p);
-		removePackage(p);
+		destination.addPackage(p);
 	}
 
 	public boolean checkCapacityAdd(Package p, int currentWeight, Status status) {
@@ -118,7 +121,11 @@ public class StandardTruck extends Truck {
 
 	@Override
 	public String toString() {
-		return "StandardTruck" + super.toString();
+		return "StandardTruck " + super.toString();
+	}
+	
+	protected String truckCharacteristics() {
+		return ", maxWeight=" + getMaxWeight();
 	}
 	
 }

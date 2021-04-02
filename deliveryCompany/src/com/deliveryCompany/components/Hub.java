@@ -31,6 +31,8 @@ public class Hub extends Branch {
 					}
 					Random rand = new Random();
 					t.setTimeLeft(rand.nextInt(10));
+					t.getTimeLeft();
+					t.setAvailable(false);
 				}
 				else if (truck instanceof NonStandardTruck) {
 					NonStandardTruck t = (NonStandardTruck)truck;

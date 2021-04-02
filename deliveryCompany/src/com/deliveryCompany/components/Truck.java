@@ -166,15 +166,7 @@ public abstract class Truck implements Node {
 
 	public String generateLicensePlate() {
 		int n = 10000000 + new Random().nextInt(100000000);
-		int temp[] = new int[8];
-		int i = 0;
-		while(n>0) {
-			temp[i] = n%10;
-			i++;
-			n = n/10;
-		}
-		return temp[0] + "" + temp[1] + "" + temp[2] + "-" + temp[3] + "" + temp[4] + "-" + temp[5] + "" + temp[6] + "" + temp[7];
-		
+		return  n / 100000 + "-" + (n % 100000)/1000 + "-" + n % 1000 ;
 	}
 
 		

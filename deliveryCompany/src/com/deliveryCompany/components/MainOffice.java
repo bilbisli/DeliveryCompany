@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainOffice {
-	private static int clock = -1;
+	private static int clock = 0;
 	private static Hub hub;
 	private ArrayList<Package> packages;
 	
@@ -37,7 +37,7 @@ public class MainOffice {
 	public void tick() {
 		System.out.println(clockString());
 		++clock;
-		if (clock % 5 == 0)
+		if (clock % 5 == 1)
 			addPackage();
 		hub.work();
 	}

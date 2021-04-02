@@ -6,6 +6,7 @@ public class SmallPackage extends Package {
 	public SmallPackage(Priority priority, Address senderAddress, Address destinationAddress, boolean acknowledge) {
 		super(priority, senderAddress, destinationAddress);
 		this.acknowledge = acknowledge;
+		System.out.println("Creating " + toString());
 	}
 	
 	public boolean isAcknowledge() {

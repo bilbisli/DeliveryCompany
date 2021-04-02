@@ -1,14 +1,14 @@
 package com.deliveryCompany.components;
 
-import java.util.ArrayList;
-
 public class Van extends Truck {
 	public Van() {
 		super();
+		System.out.println("Creating " + toString());
 	}
 	
 	public Van(String licensePlate, String truckModel) {
 		super(licensePlate, truckModel);
+		System.out.println("Creating " + toString());
 	}
 	
 	public void work() {
@@ -30,7 +30,7 @@ public class Van extends Truck {
 	public void collectPackage(Package p) {
 		p.setStatus(Status.BRANCH_STORAGE);
 		p.addTracking(this, Status.BRANCH_STORAGE);
-		System.out.printf("Van %d has collected package %d and arrived back to branch %d", getTruckID(), p.getPackageID(),
+		System.out.printf("Van %d has collected package %d and arrived back to branch %d\n", getTruckID(), p.getPackageID(),
 				p.getDestinationAddress().getZip());
 		this.setAvailable(true);
 	}
@@ -38,10 +38,10 @@ public class Van extends Truck {
 	@Override
 	public void deliverPackage(Package p) {
 		p.setStatus(Status.DELIVERED);
-		System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
+		System.out.printf("Van %d has delivered package %d to the destination\n", getTruckID(), p.getPackageID());
 		if(p instanceof SmallPackage ) {
 			if(((SmallPackage) p).isAcknowledge()) {
-				System.out.printf("Van %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
+				System.out.printf("Van %d has delivered package %d to the destination\n", getTruckID(), p.getPackageID());
 			}
 		}
 		this.setAvailable(true);

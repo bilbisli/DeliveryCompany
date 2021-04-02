@@ -10,9 +10,10 @@ public class NonStandardTruck extends Truck {
 	public NonStandardTruck () {
 		super();
 		Random rand = new Random();
-		width = (rand.nextInt(500));
-		length = (rand.nextInt(1000));
-		height = (rand.nextInt(400));
+		width = 1+ rand.nextInt(500);
+		length = 1 + rand.nextInt(1000);
+		height = 1 + rand.nextInt(400);
+		System.out.println("Creating " + toString());
 	}
 	
 	public NonStandardTruck(String licensePlate, String truckModel, int length, int width, int height) {
@@ -20,6 +21,7 @@ public class NonStandardTruck extends Truck {
 		this.length = length;
 		this.width = width;
 		this.height = height;
+		System.out.println("Creating " + toString());
 		
 	}
 
@@ -69,7 +71,7 @@ public class NonStandardTruck extends Truck {
 
 	@Override
 	public String toString() {
-		return "NonStandardTruck [width=" + width + ", length=" + length + ", height=" + height + "]";
+		return "NonStandardTruck " + super.toString();
 	}
 
 
@@ -114,6 +116,9 @@ public class NonStandardTruck extends Truck {
 	public void setHeight(int height) {
 		this.height = height;
 	}
-
+	
+	protected String truckCharacteristics() {
+		return ", length=" + getLength() + ", width=" + getWidth() + ", height=" + getHeight() ;
+	}
 
 }

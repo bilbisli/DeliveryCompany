@@ -14,24 +14,32 @@ public class Branch implements Node {
 		branchName = getSimpleName() + " " + branchId;
 		listTrucks = new ArrayList <Truck>();
 		listPackages = new ArrayList<Package>();
+		System.out.println("Creating " + toString());
 	}
 	
 	public Branch(String branchName) {
 		branchId = nextId++;
 		this.branchName = branchName;
+		listTrucks = new ArrayList <Truck>();
+		listPackages = new ArrayList<Package>();
+		System.out.println("Creating " + toString());
 	}
 	
 	public void work() {
 		for (Truck truck : listTrucks)
 			truck.work();
+		ArrayList<Package> tempPacks = new ArrayList<Package>();
 		for (Package pack : listPackages) {
 			if (pack.getStatus() == Status.BRANCH_STORAGE)
 				checkAddTrack(pack);
 			else if (pack.getStatus() == Status.CREATION)
 				collectPackage(pack);
-			else if (pack.getStatus() == Status.DELIVERY)
+			else if (pack.getStatus() == Status.DELIVERY) {
 				deliverPackage(pack);
+				tempPacks.add(pack);
+			}
 		}
+		listPackages.removeAll(tempPacks);
 	}
 	
 	public int calcRouteTime(Address address) {
@@ -40,12 +48,12 @@ public class Branch implements Node {
 
 	@Override
 	public void collectPackage(Package p) {
-			checkMovePackage(p, Status.COLLECTION, p.getSenderAddress(), false);
+			checkMovePackage(p, Status.COLLECTION, p.getSenderAddress());
 	}
 
 	@Override
 	public void deliverPackage(Package p) {
-			checkMovePackage(p, Status.DISTRIBUTION, p.getDestinationAddress(), true);
+			checkMovePackage(p, Status.DISTRIBUTION, p.getDestinationAddress());
 	}
 	
 	public void checkAddTrack(Package pack) {
@@ -53,7 +61,7 @@ public class Branch implements Node {
 			pack.addTracking(this, Status.BRANCH_STORAGE);
 	}
 	
-	public void checkMovePackage(Package p, Status status, Address address, boolean remove) {
+	public void checkMovePackage(Package p, Status status, Address address) {
 		for (Truck truck : listTrucks)
 			if (truck.isAvailable())
 			{
@@ -62,8 +70,6 @@ public class Branch implements Node {
 				truck.setAvailable(false);
 				truck.addPackage(p);
 				truck.setTimeLeft(calcRouteTime(address));
-				if (remove)
-					removePackage(p);
 			}
 	}
 	

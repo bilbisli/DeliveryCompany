@@ -18,6 +18,7 @@ public abstract class Package {
 		this.destinationAddress = destinationAddress;
 		tracking = new ArrayList<Tracking>();
 		addTracking(null, Status.CREATION);
+		status = Status.CREATION;
 	}
 	
 	public void addTracking (Node node, Status status) {
@@ -32,7 +33,7 @@ public abstract class Package {
 	
 	@Override
 	public String toString() {
-		return String.format(getSimpleName() + " [packageID=%d, priority=%s. status=%s, startTime=%s, senderAddress=%s, destinationAddress=%s, %s]",
+		return String.format(getSimpleName() + " [packageID=%d, priority=%s, status=%s, startTime=%s, senderAddress=%s, destinationAddress=%s, %s]",
 				packageID, priority, status, tracking.get(0).getTime(), senderAddress.addressString(), 
 				destinationAddress.addressString(), packCharacteristics());
 	}
