@@ -5,7 +5,7 @@ public class NonStandardPackage extends Package {
 	private final int length;
 	private final int height;
 	
-	NonStandardPackage(Priority priority, Address senderAddress, Address destinationAddress, int width, int length, int height) {
+	public NonStandardPackage(Priority priority, Address senderAddress, Address destinationAddress, int width, int length, int height) {
 		super(priority, senderAddress, destinationAddress);
 		this.width = width;
 		this.length = length;

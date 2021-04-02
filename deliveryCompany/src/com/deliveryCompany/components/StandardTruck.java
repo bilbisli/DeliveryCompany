@@ -73,7 +73,7 @@ public class StandardTruck extends Truck {
 					int currentWeight = 0;
 					for (Package pack : destination.getListPackages()) {
 						if (pack.getStatus() == Status.BRANCH_STORAGE) {
-							destination.checkAddTrack(pack);
+//							destination.checkAddTrack(pack);
 							if(!checkCapacityAdd(pack, currentWeight, Status.HUB_TRANSPORT))
 								break;
 						}
