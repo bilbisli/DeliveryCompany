@@ -10,16 +10,10 @@ public class NonStandardTruck extends Truck {
 	public NonStandardTruck () {
 		super();
 		Random rand = new Random();
-//		width = 1 + rand.nextInt(500);
-//		length = 1 + rand.nextInt(1000);
-//		height = 1 + rand.nextInt(400);
-		
-		// --------------------------
-		width = 500;
-		length = 1000;
-		height = 400;
-		//---------------------------
-		
+		width = 1 + rand.nextInt(500);
+		length = 1 + rand.nextInt(1000);
+		height = 1 + rand.nextInt(400);
+
 		System.out.println("Creating " + toString());
 		
 
@@ -37,7 +31,6 @@ public class NonStandardTruck extends Truck {
 		if(!isAvailable()) {
 			setTimeLeft(getTimeLeft()-1);
 			Package temp = getLastPack();
-			System.out.println(temp.getStatus());
 			if(getTimeLeft() == 0) {
 				if(temp.getStatus() == Status.COLLECTION) {
 					collectPackage(temp);

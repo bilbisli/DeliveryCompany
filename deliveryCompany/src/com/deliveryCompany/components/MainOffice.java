@@ -7,24 +7,16 @@ public class MainOffice {
 	private static int clock = 0;
 	private static Hub hub;
 	private ArrayList<Package> packages;
-	// -----------------
-	public static ArrayList<Truck> trucks = new ArrayList<Truck>();
-	// -----------------
+	
 	public MainOffice(int branches, int trucksForBranch) {
 		hub = new Hub();
 		packages = new ArrayList<Package>();
 		hub.addTrucks(trucksForBranch);
 		hub.addTruck(new NonStandardTruck());
-		// ------------
-//		trucks.addAll(hub.getListTrucks());
-		// ------------
 		for (int i = 0; i < branches; ++i) {
 			Branch b = new Branch();
 			b.addTrucks(trucksForBranch);
 			hub.addBranch(b);
-			// ------------
-//			trucks.addAll(b.getListTrucks());
-			// ------------
 		}
 	}
 	
@@ -51,17 +43,6 @@ public class MainOffice {
 		if (clock % 5 == 1)
 			addPackage();
 		hub.work();
-		
-		
-//		System.out.println("\n\n-----------------\n");
-//		for (Package p : packages)
-//			System.out.println(p);
-//		for (Truck t : trucks)
-//			if (!(t.getPackages().isEmpty()))
-//				System.out.println(t + " " + t.getPackages());
-//		System.out.println(hub + " " + hub.getListPackages());
-//		for (Branch b : hub.getBranches())
-//			System.out.println(b + " " + b.getListPackages());
 	}
 	
 	public void addPackage() {
@@ -72,7 +53,7 @@ public class MainOffice {
 		Address sender = new Address(zipSender, 1000000 + rand.nextInt(10000000));
 		Address destination = new Address(zipDestination, 1000000 + rand.nextInt(10000000));
 		
-		switch (rand.nextInt(3)) {
+		switch (rand.nextInt(4)) {
 		case 0:
 			boolean acknowledge = rand.nextBoolean();
 			p = new SmallPackage(priority, sender, destination, acknowledge);
