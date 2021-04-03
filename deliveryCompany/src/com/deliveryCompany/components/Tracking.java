@@ -3,7 +3,7 @@ package com.deliveryCompany.components;
 public class Tracking {
 
 	private final int time;
-	private final Node node;
+	private Node node;
 	private final Status status;
 	
 	public Tracking(int time, Node node, Status status) {
@@ -26,6 +26,11 @@ public class Tracking {
 	
 	@Override
 	public String toString() {
-		return time + ": " + node + ", status=" + status;
+		String nodeString = "Costumer";
+		if(node instanceof Truck)
+			nodeString = ((Truck) node).getSimpleName() + " " + ((Truck) node).getTruckID();
+		else if (node instanceof Branch)
+			nodeString = ((Branch) node).getBranchName();
+		return time + ": " + nodeString + ", status=" + status;
 	}
 }

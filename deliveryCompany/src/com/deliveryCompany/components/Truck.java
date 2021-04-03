@@ -169,6 +169,8 @@ public abstract class Truck implements Node {
 		return  n / 100000 + "-" + (n % 100000)/1000 + "-" + n % 1000 ;
 	}
 
-		
+	public String getSimpleName() {
+		return "Truck";
+	}	
 }
 

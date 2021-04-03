@@ -1,5 +1,6 @@
 package com.deliveryCompany.components;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class StandardTruck extends Truck {
@@ -57,39 +58,46 @@ public class StandardTruck extends Truck {
 	}
 	
 	public void work() {
-		if(!isAvailable()) {
+		if (!isAvailable())
 			setTimeLeft(getTimeLeft()-1);
-			if(getTimeLeft() == 0) {
-				System.out.printf("StandardTruck %d loaded packages at %s\n", getTruckID(), destination.getBranchName());
-				for(Package pack : getPackages()) {
-					if(pack.getStatus() == Status.BRANCH_TRANSPORT)
-						pack.setStatus(Status.DELIVERY);
-					else if(pack.getStatus() == Status.HUB_TRANSPORT)
-						pack.setStatus(Status.HUB_STORAGE);
+		if(!isAvailable() && getTimeLeft() == 0) {
+			System.out.printf("StandardTruck %d arrived to %s\n", getTruckID(), destination.getBranchName());
+			// System.out.printf("StandardTruck %d loaded packages at %s\n", getTruckID(), destination.getBranchName());
+			for(Package pack : getPackages()) {
+				if(pack.getStatus() == Status.BRANCH_TRANSPORT) {
+					pack.setStatus(Status.DELIVERY);
 					deliverPackage(pack);
 				}
-				getPackages().clear();
-				if (destination instanceof Hub)
-					setAvailable(true);
-				else
-				{
-					int currentWeight = 0;
-					for (Package pack : destination.getListPackages()) {
-						if (pack.getStatus() == Status.BRANCH_STORAGE) {
-//							destination.checkAddTrack(pack);
-							if(!checkCapacityAdd(pack, currentWeight, Status.HUB_TRANSPORT))
-								break;
-						}
-					}
-					Random rand = new Random();
-					setTimeLeft(rand.nextInt(7));
-					setDestination(MainOffice.getHub());
+				else if(pack.getStatus() == Status.HUB_TRANSPORT) {
+					pack.setStatus(Status.HUB_STORAGE);
+					deliverPackage(pack);
 				}
+			}
+			getPackages().clear();
+			System.out.printf("StandardTruck %d unloaded packages at %s\n", getTruckID(), destination.getBranchName());
+			if (destination instanceof Hub) {
+				setAvailable(true);
+			}
+			else
+			{
+				int currentWeight = 0;
+				ArrayList<Package> tempPackages = new ArrayList<Package>();
+				for (Package pack : destination.getListPackages()) {
+					if(pack.getStatus() == Status.BRANCH_STORAGE) {
+						if (!checkCapacityAdd(pack, currentWeight, Status.HUB_TRANSPORT))
+							break;
+						else tempPackages.add(pack);
+					}
+				}
+				destination.getListPackages().removeAll(tempPackages);
+				Random rand = new Random();
+				setTimeLeft(1 + rand.nextInt(6));
+				System.out.printf("StandardTruck %d loaded packages at %s\n", getTruckID(), destination.getBranchName());
+				setDestination(MainOffice.getHub());
 				System.out.printf("StandardTruck %d is on it's way to the %s, time to arrive: %d\n", getTruckID(),
 						destination.getBranchName(), getTimeLeft());
 			}
 		}
-
 	}
 
 	@Override
@@ -100,18 +108,17 @@ public class StandardTruck extends Truck {
 
 	@Override
 	public void deliverPackage(Package p) {
-		System.out.printf("StandardTruck %d arrived to Branch %d\n", getTruckID(), destination.getBranchId());
 		p.addTracking(destination, p.getStatus());
 		destination.addPackage(p);
 	}
 
 	public boolean checkCapacityAdd(Package p, int currentWeight, Status status) {
 		double temp;
-		
 		if (p instanceof SmallPackage && (1 + currentWeight <= getMaxWeight())) 
 				temp = 1;
 		else if (p instanceof StandardPackage && (((StandardPackage)p).getWeight() + currentWeight) <= getMaxWeight())
 			temp = ((StandardPackage)p).getWeight();
+		else if (p instanceof NonStandardPackage) return true;
 		else return false;
 		currentWeight += temp;
 		p.setStatus(status);
@@ -122,6 +129,10 @@ public class StandardTruck extends Truck {
 	@Override
 	public String toString() {
 		return "StandardTruck " + super.toString();
+	}
+	
+	public String getSimpleName() {
+		return "StandardTruck";
 	}
 	
 	protected String truckCharacteristics() {

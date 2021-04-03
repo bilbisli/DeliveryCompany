@@ -10,10 +10,19 @@ public class NonStandardTruck extends Truck {
 	public NonStandardTruck () {
 		super();
 		Random rand = new Random();
-		width = 1+ rand.nextInt(500);
-		length = 1 + rand.nextInt(1000);
-		height = 1 + rand.nextInt(400);
+//		width = 1 + rand.nextInt(500);
+//		length = 1 + rand.nextInt(1000);
+//		height = 1 + rand.nextInt(400);
+		
+		// --------------------------
+		width = 500;
+		length = 1000;
+		height = 400;
+		//---------------------------
+		
 		System.out.println("Creating " + toString());
+		
+
 	}
 	
 	public NonStandardTruck(String licensePlate, String truckModel, int length, int width, int height) {
@@ -22,23 +31,20 @@ public class NonStandardTruck extends Truck {
 		this.width = width;
 		this.height = height;
 		System.out.println("Creating " + toString());
-		
 	}
 
 	public void work() {
 		if(!isAvailable()) {
 			setTimeLeft(getTimeLeft()-1);
 			Package temp = getLastPack();
+			System.out.println(temp.getStatus());
 			if(getTimeLeft() == 0) {
 				if(temp.getStatus() == Status.COLLECTION) {
-					int temptime = ((Math.abs(getLastPack().getSenderAddress().getStreet()
-							- getLastPack().getDestinationAddress().getStreet()) / 10) % 10) + 1;
-					setTimeLeft(temptime);
 					collectPackage(temp);
-					
 				}
-				if(temp.getStatus() == Status.DISTRIBUTION) {
+				else if(temp.getStatus() == Status.DISTRIBUTION) {
 					deliverPackage(temp);
+					
 				}
 			}
 		}
@@ -48,32 +54,39 @@ public class NonStandardTruck extends Truck {
 	public void collectPackage(Package p) {
 		p.setStatus(Status.DISTRIBUTION);
 		p.addTracking(this, Status.DISTRIBUTION);
-		System.out.printf("NonStandartTruck %d is collecting package %d, time left: %d", getTruckID(), p.getPackageID(),
-				getTimeLeft());
-		this.setAvailable(true);
-		
+		setTimeLeft(calcTime());
+		System.out.printf("NonStandardTruck %d has collected package %d\n", getTruckID(), p.getPackageID());
+		System.out.printf("NonStandardTruck %d is delivering package %d, time left: %d \n", getTruckID(), 
+				p.getPackageID(), getTimeLeft());
 	}
 
 	@Override
 	public void deliverPackage(Package p) {
 		p.setStatus(Status.DELIVERED);
-		System.out.printf("NonStandardTruck %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
+		p.addTracking(this, Status.DELIVERED);
+		System.out.printf("NonStandardTruck %d has delivered package %d to the destination\n", getTruckID(), p.getPackageID());
 		if(p instanceof SmallPackage ) {
 			if(((SmallPackage) p).isAcknowledge()) {
 				System.out.printf("NonStandardTruck %d has delivered package %d to the destination", getTruckID(), p.getPackageID());
 			}
 		}	
 		removePackage(p);
-		
+		this.setAvailable(true);
 	}
 	
-
+	public int calcTime() {
+		return ((Math.abs(getLastPack().getSenderAddress().getStreet()
+				- getLastPack().getDestinationAddress().getStreet()) / 10) % 10) + 1;
+	}
 
 	@Override
 	public String toString() {
 		return "NonStandardTruck " + super.toString();
 	}
 
+	public String getSimpleName() {
+		return "NonStandardTruck";
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -120,5 +133,7 @@ public class NonStandardTruck extends Truck {
 	protected String truckCharacteristics() {
 		return ", length=" + getLength() + ", width=" + getWidth() + ", height=" + getHeight() ;
 	}
+	
+	
 
 }

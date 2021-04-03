@@ -29,15 +29,17 @@ public class Van extends Truck {
 	@Override
 	public void collectPackage(Package p) {
 		p.setStatus(Status.BRANCH_STORAGE);
-		p.addTracking(this, Status.BRANCH_STORAGE);
+		p.addTracking(MainOffice.getBranch(p.getSenderAddress().getZip()), Status.BRANCH_STORAGE);
 		System.out.printf("Van %d has collected package %d and arrived back to branch %d\n", getTruckID(), p.getPackageID(),
-				p.getDestinationAddress().getZip());
-		this.setAvailable(true);
+				p.getSenderAddress().getZip());
+		removePackages();
+		setAvailable(true);
 	}
 	
 	@Override
 	public void deliverPackage(Package p) {
 		p.setStatus(Status.DELIVERED);
+		p.addTracking(null, Status.DELIVERED);
 		System.out.printf("Van %d has delivered package %d to the destination\n", getTruckID(), p.getPackageID());
 		if(p instanceof SmallPackage ) {
 			if(((SmallPackage) p).isAcknowledge()) {
@@ -51,5 +53,9 @@ public class Van extends Truck {
 	@Override
 	public String toString() {
 		return "Van " + super.toString();
+	}
+	
+	public String getSimpleName() {
+		return "Van";
 	}
 }

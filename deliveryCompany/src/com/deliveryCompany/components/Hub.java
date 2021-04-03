@@ -14,8 +14,6 @@ public class Hub extends Branch {
 	}
 	
 	public void work() {
-		for (Branch branch : branches)
-			branch.work();
 		for (Truck truck : getListTrucks()) {
 			truck.work();
 			if (truck.isAvailable()) {
@@ -23,16 +21,23 @@ public class Hub extends Branch {
 					StandardTruck t = ((StandardTruck)truck);
 					t.setDestination(getBranch(nextBranch()));
 					int currentWeight = 0;
+					ArrayList<Package> tempPackages = new ArrayList<Package>();
 					for (Package pack : getListPackages()) {
 						if (pack.getDestinationAddress().getZip() == t.getDestination().getBranchId()) {
 							if(!t.checkCapacityAdd(pack, currentWeight, Status.BRANCH_TRANSPORT))
 								break;
+							else tempPackages.add(pack);
 						}
 					}
+					getListPackages().removeAll(tempPackages);
 					Random rand = new Random();
-					t.setTimeLeft(rand.nextInt(10));
+					t.setTimeLeft(1 + rand.nextInt(9));
 					t.getTimeLeft();
 					t.setAvailable(false);
+					if (truck.getTimeLeft() != 0)
+						System.out.printf("StandardTruck %d is on it's way to %s, time to arrive: %d\n", 
+								((StandardTruck)truck).getTruckID(), 
+								((StandardTruck)truck).getDestination().getBranchName(), truck.getTimeLeft());
 				}
 				else if (truck instanceof NonStandardTruck) {
 					NonStandardTruck t = (NonStandardTruck)truck;
@@ -44,12 +49,20 @@ public class Hub extends Branch {
 								p.setStatus(Status.COLLECTION);
 								p.addTracking(t, Status.COLLECTION);
 								t.addPackage(p);
+								t.setAvailable(false);
+								t.setTimeLeft(t.calcTime());
+								removePackage(p);
+								System.out.printf("NonStandartTruck %d is collecting package %d, time left: %d\n",t.getTruckID(), p.getPackageID(),
+										t.getTimeLeft());
+								break;
 							}
 						}
 					}
 				}
 			}
 		}
+		for (Branch branch : branches)
+			branch.work();
 	}
 	
 	public int nextBranch() {

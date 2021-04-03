@@ -30,13 +30,15 @@ public class Branch implements Node {
 			truck.work();
 		ArrayList<Package> tempPacks = new ArrayList<Package>();
 		for (Package pack : listPackages) {
-			if (pack.getStatus() == Status.BRANCH_STORAGE)
-				checkAddTrack(pack);
-			else if (pack.getStatus() == Status.CREATION)
-				collectPackage(pack);
+			if (pack.getStatus() == Status.CREATION) {
+				Truck t = checkMovePackage(pack, Status.COLLECTION, pack.getSenderAddress());
+				if (t != null)
+					collectPackage(pack);
+			}
 			else if (pack.getStatus() == Status.DELIVERY) {
-				deliverPackage(pack);
-				tempPacks.add(pack);
+				if (null != checkMovePackage(pack, Status.DISTRIBUTION, pack.getDestinationAddress())) {
+					tempPacks.add(pack);
+				}
 			}
 		}
 		listPackages.removeAll(tempPacks);
@@ -48,12 +50,13 @@ public class Branch implements Node {
 
 	@Override
 	public void collectPackage(Package p) {
-			checkMovePackage(p, Status.COLLECTION, p.getSenderAddress());
+		System.out.printf("Van %d is collecting package %d, time to arrive: %d\n",((Truck)p.getLastTrack().getNode()).getTruckID(),
+				p.getPackageID(), ((Truck)(p.getLastTrack().getNode())).getTimeLeft());
 	}
 
 	@Override
 	public void deliverPackage(Package p) {
-			checkMovePackage(p, Status.DISTRIBUTION, p.getDestinationAddress());
+		checkMovePackage(p, Status.DISTRIBUTION, p.getDestinationAddress());
 	}
 	
 	public void checkAddTrack(Package pack) {
@@ -61,16 +64,17 @@ public class Branch implements Node {
 			pack.addTracking(this, Status.BRANCH_STORAGE);
 	}
 	
-	public void checkMovePackage(Package p, Status status, Address address) {
+	public Truck checkMovePackage(Package p, Status status, Address address) {
 		for (Truck truck : listTrucks)
-			if (truck.isAvailable())
-			{
+			if (truck.isAvailable()) {
 				p.setStatus(status);
 				p.addTracking(truck, status);
 				truck.setAvailable(false);
 				truck.addPackage(p);
 				truck.setTimeLeft(calcRouteTime(address));
+				return truck;
 			}
+		return null;
 	}
 	
 	@Override
