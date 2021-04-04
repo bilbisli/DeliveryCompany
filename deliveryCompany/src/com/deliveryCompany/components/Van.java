@@ -43,7 +43,7 @@ public class Van extends Truck {
 		System.out.printf("Van %d has delivered package %d to the destination\n", getTruckID(), p.getPackageID());
 		if(p instanceof SmallPackage ) {
 			if(((SmallPackage) p).isAcknowledge()) {
-				System.out.printf("Van %d has delivered package %d to the destination\n", getTruckID(), p.getPackageID());
+				System.out.printf("Small package %d with notification arrived to it's destination.\n", p.getPackageID());
 			}
 		}
 		this.setAvailable(true);
