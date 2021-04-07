@@ -1,24 +1,32 @@
 package com.deliveryCompany.components;
 
+/**
+ * This class represents Tracking listing of a package
+ * @version	1.00 7 Apr 2021
+ * @author	Israel Avihail
+ * @see		Package
+ * @see		Node
+ */
 public class Tracking {
 
 	/**
-	 * 
+	 * Represents the time when the listing was made
 	 */
 	private final int time;
 	/**
-	 * 
+	 * Represents where the package was when the listing was made (truck or branch)
 	 */
 	private Node node;
 	/**
-	 * 
+	 * Represents the status of the package when the listing was made
 	 */
 	private final Status status;
 	
 	/**
-	 * @param time
-	 * @param node
-	 * @param status
+	 * Class constructor with specified parameters
+	 * @param time the time to set the time when the listing was made
+	 * @param node the node to set the Node where the package was when the listing was made
+	 * @param status the status to set the status of the package when the listing was made
 	 */
 	public Tracking(int time, Node node, Status status) {
 		this.time = time;
@@ -27,28 +35,31 @@ public class Tracking {
 	}
 
 	/**
-	 * @return
+	 * Get method for the time field
+	 * @return the time when the listing was made
 	 */
 	public int getTime() {
 		return time;
 	}
 
 	/**
-	 * @return
+	 * Get method for the node field
+	 * @return the node that the package was at when the listing was made
 	 */
 	public Node getNode() {
 		return node;
 	}
 
 	/**
-	 * @return
+	 * Get method for the status field
+	 * @return the status the package was when the listing was made
 	 */
 	public Status getStatus() {
 		return status;
 	}
 	
 	/**
-	 *
+	 * This method builds and displays a string representation of a tracking listing
 	 */
 	@Override
 	public String toString() {

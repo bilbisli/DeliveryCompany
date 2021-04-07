@@ -1,8 +1,15 @@
 package com.deliveryCompany.components;
 
+/**
+ * This class represents a non standard truck that collects and delivers non standard packages (one at a time)
+ * @version	1.00 7 Apr 2021
+ * @author	Israel Avihail
+ * @see		Package
+ * @see		Truck
+ */
 public class Van extends Truck {
 	/**
-	 * 
+	 * Class constructor that creates a van object
 	 */
 	public Van() {
 		super();
@@ -10,8 +17,9 @@ public class Van extends Truck {
 	}
 	
 	/**
-	 * @param licensePlate
-	 * @param truckModel
+	 * Class constructor that creates a van based on specified characteristics
+	 * @param licensePlate the license plate of the van to be set
+	 * @param truckModel the model of the van to be set
 	 */
 	public Van(String licensePlate, String truckModel) {
 		super(licensePlate, truckModel);
@@ -19,7 +27,8 @@ public class Van extends Truck {
 	}
 	
 	/**
-	 *
+	 * This method represents work van - if the van is on it's way the time until it gets to the destination is reduced, 
+	 * if the van has reached it's destination the van collects\delivers the package according to the appropriate status of the package
 	 */
 	public void work() {
 		if(!isAvailable()) {
@@ -37,7 +46,8 @@ public class Van extends Truck {
 	}
 	
 	/**
-	 *
+	 * This method handles the completion of collection of a package from a costumer by the van, the appropriate status of the package is set, 
+	 * a tracking listing is added and the packaged is removed from the van (it is at the branch now)
 	 */
 	@Override
 	public void collectPackage(Package p) {
@@ -50,7 +60,8 @@ public class Van extends Truck {
 	}
 	
 	/**
-	 *
+	 * This method handles the delivery of a non standard package from the van to a costumer, the appropriate status of the package is set and a 
+	 * tracking listing is added
 	 */
 	@Override
 	public void deliverPackage(Package p) {
@@ -75,7 +86,7 @@ public class Van extends Truck {
 	}
 	
 	/**
-	 *
+	 * This method constructs a string representation of a van
 	 */
 	public String getSimpleName() {
 		return "Van";

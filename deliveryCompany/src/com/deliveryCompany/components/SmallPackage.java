@@ -1,16 +1,24 @@
 package com.deliveryCompany.components;
 
+
+/**
+ * This class represents a small package
+ * @version	1.00 7 Apr 2021
+ * @author	Israel Avihail
+ * @see		Package
+ */
 public class SmallPackage extends Package {
 	/**
-	 * 
+	 * Boolean field to determine if a special notification should be displayed when the small package arrives to it's destination
 	 */
 	private boolean acknowledge;
 
 	/**
-	 * @param priority
-	 * @param senderAddress
-	 * @param destinationAddress
-	 * @param acknowledge
+	 * Class constructor that creates a small package object based on specified parameters
+	 * @param priority the priority of the package's shipment
+	 * @param senderAddress the address of the sender of the package
+	 * @param destinationAddress the address of the recipient of the package
+	 * @param acknowledge the indication if a special notification will be sent when the package arrives to it's destination
 	 */
 	public SmallPackage(Priority priority, Address senderAddress, Address destinationAddress, boolean acknowledge) {
 		super(priority, senderAddress, destinationAddress);
@@ -19,6 +27,7 @@ public class SmallPackage extends Package {
 	}
 	
 	/**
+	 * This method checks if a special notification needs to be sent when the package arrives to it's destination
 	 * @return
 	 */
 	public boolean isAcknowledge() {
@@ -26,14 +35,15 @@ public class SmallPackage extends Package {
 	}
 
 	/**
-	 * @param acknowledge
+	 * Set method for acknowledge field
+	 * @param acknowledge the specified parameter to set acknowledge to
 	 */
 	public void setAcknowledge(boolean acknowledge) {
 		this.acknowledge = acknowledge;
 	}
 
 	/**
-	 *
+	 * This method returns the special characteristics of a small package represented as a string
 	 */
 	@Override
 	protected String packCharacteristics() {
@@ -41,18 +51,7 @@ public class SmallPackage extends Package {
 	}
 
 	/**
-	 *
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + (acknowledge ? 1231 : 1237);
-		return result;
-	}
-
-	/**
-	 *
+	 * Equals method for comparing two small package instances
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -69,7 +68,8 @@ public class SmallPackage extends Package {
 	}
 
 	/**
-	 *
+	 * This method returns the name of the class
+	 * @return a string representation of the name of the class
 	 */
 	public String getSimpleName() {
 		return "SmallPackage";

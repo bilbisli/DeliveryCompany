@@ -3,18 +3,28 @@ package com.deliveryCompany.components;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * This class represents a hub branch - a branch that acts as a sorting center where all packages from local branches are sent to 
+ * after initial collection. After sorting, packages are dispatched from the hub to the matching local branches of the destination address
+ * @version	1.00 7 Apr 2021
+ * @author	Israel Avihail
+ * @see		Branch
+ * @see		Package
+ * @see		StandardTruck
+ * @see		NonStandardTruck
+ */
 public class Hub extends Branch {
 	/**
-	 * 
+	 * The list of all the branches that belong to this hub (that send and receive packages to and from the hub)
 	 */
 	private ArrayList<Branch> branches;
 	/**
-	 * 
+	 * Represents the current branch which standard trucks will be sent to
 	 */
 	private int currentBranch;
 	
 	/**
-	 * 
+	 * Class constructor initiates the list of branches and the current branch to send a standard truck to
 	 */
 	public Hub() {
 		super("HUB");
@@ -23,7 +33,10 @@ public class Hub extends Branch {
 	}
 	
 	/**
-	 *
+	 * This method represents work of the hub - manages every truck under the hub (by activating it's work method), loads it's trucks with packages and
+	 * sends them to the appropriate branch: if a standard truck is available, all packages of the current branch are loaded on it and the truck is sent
+	 * to dispatch the packages. If a non standard package is to be collected and delivered and the a non standard truck is available, it is then sent 
+	 * to collect it
 	 */
 	public void work() {
 		for (Truck truck : getListTrucks()) {
@@ -78,7 +91,8 @@ public class Hub extends Branch {
 	}
 	
 	/**
-	 * @return
+	 * This method generates the next branch id send a standard truck to
+	 * @return the id of the next branch to send a truck to
 	 */
 	public int nextBranch() {
 		if (currentBranch + 1 >= branches.size())
@@ -87,18 +101,7 @@ public class Hub extends Branch {
 	}
 
 	/**
-	 *
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((branches == null) ? 0 : branches.hashCode());
-		return result;
-	}
-
-	/**
-	 *
+	 * Equals method for comparing two hub instances
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -118,57 +121,63 @@ public class Hub extends Branch {
 	}
 	
 	/**
-	 * @param index
-	 * @return
+	 * This method is for getting a branch in a specified index within the list of branches
+	 * @param 	index the index of the branch within the list of branches
+	 * @return	the branch in the specified index
 	 */
 	public Branch getBranch(int index) {
 		return branches.get(index);
 	}
 
 	/**
-	 * @return
+	 * Get method for the list of branches
+	 * @return the list of branches that belong to the hub
 	 */
 	public ArrayList<Branch> getBranches() {
 		return branches;
 	}
 
 	/**
-	 * @param branches
+	 * Set method for the list of branches that belong to the hub
+	 * @param branches the specified branch list to set for the hub
 	 */
 	public void setBranches(ArrayList<Branch> branches) {
 		this.branches = branches;
 	}
 
 	/**
-	 * 
+	 * This method is for adding a new default branch to the hub's branch list
 	 */
 	public void addBranch() {
 		branches.add(new Branch());
 	}
 	
 	/**
-	 * @param branchName
+	 * This method is for adding a new branch with a specified name to the hub branch list
+	 * @param branchName the specified branch name for the branch that will be added to the hub
 	 */
 	public void addBranch(String branchName) {
 		branches.add(new Branch(branchName));
 	}
 	
 	/**
-	 * @param branch
+	 * This method is for adding a new specified branch to the hub branch list
+	 * @param branch the specified branch to add to the hub
 	 */
 	public void addBranch(Branch branch) {
 		branches.add(branch);
 	}
 	
 	/**
-	 * 
+	 * This method is for adding a default standard truck to the hub
 	 */
 	public void addTruck() {
 		super.addTruck(new StandardTruck());
 	}
 	
 	/**
-	 *
+	 * This method is for adding a specified number of default trucks to the hub
+	 * @param amount the amount of trucks to create for the hub
 	 */
 	public void addTrucks(int amount) {
 		for (int i = 0; i < amount; ++i)
