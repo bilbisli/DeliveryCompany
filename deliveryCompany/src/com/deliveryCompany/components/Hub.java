@@ -7,7 +7,8 @@ import java.util.Random;
  * This class represents a hub branch - a branch that acts as a sorting center where all packages from local branches are sent to 
  * after initial collection. After sorting, packages are dispatched from the hub to the matching local branches of the destination address
  * @version	1.00 7 Apr 2021
- * @author	Israel Avihail
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see		Branch
  * @see		Package
  * @see		StandardTruck

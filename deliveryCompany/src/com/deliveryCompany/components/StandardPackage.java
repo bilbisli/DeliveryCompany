@@ -3,7 +3,8 @@ package com.deliveryCompany.components;
 /**
  * Class represents packages with varying weights over one kilogram.
  * @version 1.00 7 Apr 2021
- * @author  Ofir
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see  	Package
  */
 

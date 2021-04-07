@@ -4,7 +4,8 @@ import java.util.Random;
 /**
  * This class represents a non standard truck that collects and delivers non standard packages (one at a time)
  * @version	1.00 7 Apr 2021
- * @author	Israel Avihail
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see		Package
  * @see		Truck
  */

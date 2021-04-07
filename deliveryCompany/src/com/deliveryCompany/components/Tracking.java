@@ -3,7 +3,8 @@ package com.deliveryCompany.components;
 /**
  * This class represents Tracking listing of a package
  * @version	1.00 7 Apr 2021
- * @author	Israel Avihail
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see		Package
  * @see		Node
  */

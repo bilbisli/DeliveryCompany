@@ -7,7 +7,8 @@ import java.util.Random;
  * Vehicle for transporting packages from the sorting center to the branches and back.
  * All vehicles of this type are in the sorting center.
  * @version 1.00 7 Apr 2021
- * @author  Ofir
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see  	Truck
  */
 

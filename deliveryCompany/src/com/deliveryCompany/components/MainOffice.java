@@ -7,7 +7,8 @@ import java.util.Random;
  * This class represents a main office that creates the branches of the delivery company, the trucks for the branches and the packages 
  * and makes the whole system run according to a clock
  * @version	1.00 7 Apr 2021
- * @author	Israel Avihail
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see		Branch
  * @see		Package
  * @see		Truck

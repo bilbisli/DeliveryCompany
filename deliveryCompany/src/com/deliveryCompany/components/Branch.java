@@ -7,7 +7,8 @@ import java.util.ArrayList;
  * from the sender's address to this branch, and a list of vehicles that collect the packages from the 
  * sending customers and deliver the packages to the receiving customers.
  * @version 1.00 7 Apr 2021
- * @author  Ofir
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see  	Node
  */
 

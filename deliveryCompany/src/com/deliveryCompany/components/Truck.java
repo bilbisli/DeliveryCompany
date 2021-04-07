@@ -5,7 +5,8 @@ import java.util.ArrayList;
 /**
  * Department representing the vehicles for transporting packages.
  * @version 1.00 7 Apr 2021
- * @author  Ofir
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see  	Package
  */
 

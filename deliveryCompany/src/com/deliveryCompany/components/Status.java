@@ -3,7 +3,8 @@ package com.deliveryCompany.components;
 /**
  * This enum is for setting the status of a certain package
  * @version	1.00 7 Apr 2021
- * @author	Israel Avihail
+ * @author	Israel Avihail 308298363
+ * @author	Ofir Golan 315585323
  * @see		Package
  */
 public enum Status {
