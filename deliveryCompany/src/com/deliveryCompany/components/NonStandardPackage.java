@@ -1,10 +1,27 @@
 package com.deliveryCompany.components;
 
 public class NonStandardPackage extends Package {
+	/**
+	 * 
+	 */
 	private final int width;
+	/**
+	 * 
+	 */
 	private final int length;
+	/**
+	 * 
+	 */
 	private final int height;
 	
+	/**
+	 * @param priority
+	 * @param senderAddress
+	 * @param destinationAddress
+	 * @param width
+	 * @param length
+	 * @param height
+	 */
 	public NonStandardPackage(Priority priority, Address senderAddress, Address destinationAddress, int width, int length, int height) {
 		super(priority, senderAddress, destinationAddress);
 		this.width = width;
@@ -13,18 +30,30 @@ public class NonStandardPackage extends Package {
 		System.out.println("Creating " + toString());
 	}
 
+	/**
+	 * @return
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getLength() {
 		return length;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -35,6 +64,9 @@ public class NonStandardPackage extends Package {
 		return result;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -53,11 +85,17 @@ public class NonStandardPackage extends Package {
 		return true;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	protected String packCharacteristics() {
 		return "width=" + width + ", length=" + length + ", height=" + height;
 	}
 	
+	/**
+	 *
+	 */
 	public String getSimpleName() {
 		return "NonStandardPackage";
 	}

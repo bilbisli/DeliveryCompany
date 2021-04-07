@@ -3,12 +3,30 @@ package com.deliveryCompany.components;
 import java.util.ArrayList;
 
 public class Branch implements Node {
+	/**
+	 * 
+	 */
 	private static int nextId = -1; 
+	/**
+	 * 
+	 */
 	private final int branchId;
+	/**
+	 * 
+	 */
 	private String branchName;
+	/**
+	 * 
+	 */
 	private ArrayList <Package> listPackages;
+	/**
+	 * 
+	 */
 	private ArrayList <Truck> listTrucks;
 	
+	/**
+	 * 
+	 */
 	public Branch() {
 		branchId = nextId++;
 		branchName = getSimpleName() + " " + branchId;
@@ -17,6 +35,9 @@ public class Branch implements Node {
 		System.out.println("Creating " + toString());
 	}
 	
+	/**
+	 * @param branchName
+	 */
 	public Branch(String branchName) {
 		branchId = nextId++;
 		this.branchName = branchName;
@@ -25,6 +46,9 @@ public class Branch implements Node {
 		System.out.println("Creating " + toString());
 	}
 	
+	/**
+	 *
+	 */
 	public void work() {
 		for (Truck truck : listTrucks)
 			truck.work();
@@ -44,26 +68,45 @@ public class Branch implements Node {
 		listPackages.removeAll(tempPacks);
 	}
 	
+	/**
+	 * @param address
+	 * @return
+	 */
 	public int calcRouteTime(Address address) {
 		return (address.getStreet() / 10) % 10 + 1;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void collectPackage(Package p) {
 		System.out.printf("Van %d is collecting package %d, time to arrive: %d\n",((Truck)p.getLastTrack().getNode()).getTruckID(),
 				p.getPackageID(), ((Truck)(p.getLastTrack().getNode())).getTimeLeft());
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void deliverPackage(Package p) {
 		checkMovePackage(p, Status.DISTRIBUTION, p.getDestinationAddress());
 	}
 	
+	/**
+	 * @param pack
+	 */
 	public void checkAddTrack(Package pack) {
 		if (!pack.getLastTrack().getNode().equals(this))
 			pack.addTracking(this, Status.BRANCH_STORAGE);
 	}
 	
+	/**
+	 * @param p
+	 * @param status
+	 * @param address
+	 * @return
+	 */
 	public Truck checkMovePackage(Package p, Status status, Address address) {
 		for (Truck truck : listTrucks)
 			if (truck.isAvailable()) {
@@ -77,6 +120,9 @@ public class Branch implements Node {
 		return null;
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,12 +134,18 @@ public class Branch implements Node {
 		return result;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		return getSimpleName() + " " + branchId + ", branch name:" + branchName + ", packages: " + listPackages.size() + 
 				", trucks: "+ listTrucks.size();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -123,83 +175,146 @@ public class Branch implements Node {
 		return true;
 	}
 
+	/**
+	 * @return
+	 */
 	public static int getNextId() {
 		return nextId;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getBranchName() {
 		return branchName;
 	}
 
+	/**
+	 * @param branchName
+	 */
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
 
+	/**
+	 * @return
+	 */
 	public ArrayList<Truck> getListTrucks() {
 		return listTrucks;
 	}
 
+	/**
+	 * @param listTrucks
+	 */
 	public void setListTrucks(ArrayList<Truck> listTrucks) {
 		this.listTrucks = listTrucks;
 	}
 
+	/**
+	 * @return
+	 */
 	public ArrayList<Package> getListPackages() {
 		return listPackages;
 	}
 
+	/**
+	 * @param listPackages
+	 */
 	public void setListPackages(ArrayList<Package> listPackages) {
 		this.listPackages = listPackages;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getBranchId() {
 		return branchId;
 	}
 	
+	/**
+	 * @param index
+	 * @param p
+	 */
 	public void addPackage(int index, Package p) {
 		listPackages.add(index, p);
 	}
 	
+	/**
+	 * @param p
+	 */
 	public void addPackage(Package p) {
 		listPackages.add(p);
 	}
 	
+	/**
+	 * @param packs
+	 */
 	public void addPackages(Object packs) {
 		listPackages.addAll((ArrayList<Package>) packs);
 	}
 	
+	/**
+	 * @param index
+	 * @param packs
+	 */
 	public void addPackages(int index, Object packs) {
 		listPackages.addAll(index, (ArrayList<Package>) packs);
 	}
 	
+	/**
+	 * @param index
+	 */
 	public void removePackage(int index) {
 		listPackages.remove(index);
 	}
 	
+	/**
+	 * @param p
+	 */
 	public void removePackage(Package p) {
 		listPackages.remove(p);
 	}
 	
+	/**
+	 * @param index
+	 * @param t
+	 */
 	public void addTruck(int index, Truck t) {
 		listTrucks.add(index, t);
 	}
 	
+	/**
+	 * @param t
+	 */
 	public void addTruck(Truck t) {
 		listTrucks.add(t);
 	}
 	
+	/**
+	 * @param amount
+	 */
 	public void addTrucks(int amount) {
 		for (int i = 0; i < amount; ++i)
 			addTruck(new Van());
 	}
 	
+	/**
+	 * @param index
+	 */
 	public void removeTruck(int index) {
 		listTrucks.remove(index);
 	}
 	
+	/**
+	 * @param t
+	 */
 	public void removeTruck(Truck t) {
 		listTrucks.remove(t);
 	}
 
+	/**
+	 * @return
+	 */
 	public String getSimpleName() {
 		return "Branch";
 	}

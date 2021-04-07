@@ -4,10 +4,23 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainOffice {
+	/**
+	 * 
+	 */
 	private static int clock = 0;
+	/**
+	 * 
+	 */
 	private static Hub hub;
+	/**
+	 * 
+	 */
 	private ArrayList<Package> packages;
 	
+	/**
+	 * @param branches
+	 * @param trucksForBranch
+	 */
 	public MainOffice(int branches, int trucksForBranch) {
 		hub = new Hub();
 		packages = new ArrayList<Package>();
@@ -20,6 +33,9 @@ public class MainOffice {
 		}
 	}
 	
+	/**
+	 * @param playTime
+	 */
 	public void play(int playTime) {
 		for (int i = 0; i < playTime; ++i) {
 			tick();
@@ -28,15 +44,24 @@ public class MainOffice {
 		printReport();
 	}
 	
+	/**
+	 * 
+	 */
 	public void printReport() {
 		for (Package p : packages)
 			p.printTracking();
 	}
 	
+	/**
+	 * @return
+	 */
 	public String clockString() {
 		return String.format("%02d:%02d", clock / 100, clock % 100);
 	}
 	
+	/**
+	 * 
+	 */
 	public void tick() {
 		System.out.println(clockString());
 		++clock;
@@ -45,6 +70,9 @@ public class MainOffice {
 		hub.work();
 	}
 	
+	/**
+	 * 
+	 */
 	public void addPackage() {
 		Random rand = new Random();
 		Package p;
@@ -72,30 +100,52 @@ public class MainOffice {
 		packages.add(p);
 	}
 	
+	/**
+	 * @return
+	 */
 	public static Hub getHub() {
 		return hub;
 	}
 	
+	/**
+	 * @param hub
+	 */
 	public void setHub(Hub hub) {
 		MainOffice.hub = hub;
 	}
 	
+	/**
+	 * @return
+	 */
 	public ArrayList<Package> getPackages() {
 		return packages;
 	}
 	
+	/**
+	 * @param packages
+	 */
 	public void setPackages(ArrayList<Package> packages) {
 		this.packages = packages;
 	}
 	
+	/**
+	 * @return
+	 */
 	public static int getClock() {
 		return clock;
 	}
 	
+	/**
+	 * @param clock
+	 */
 	public static void setClock(int clock) {
 		MainOffice.clock = clock;
 	}
 	
+	/**
+	 * @param index
+	 * @return
+	 */
 	public static Branch getBranch(int index) {
 		return hub.getBranch(index);
 	}

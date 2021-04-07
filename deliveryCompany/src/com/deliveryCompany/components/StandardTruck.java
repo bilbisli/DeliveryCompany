@@ -4,9 +4,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class StandardTruck extends Truck {
+	/**
+	 * 
+	 */
 	private int maxWeight;
+	/**
+	 * 
+	 */
 	private Branch destination;
 	
+	/**
+	 * 
+	 */
 	public StandardTruck () {
 		super();
 		maxWeight = 70;
@@ -15,6 +24,11 @@ public class StandardTruck extends Truck {
 		
 	}
 
+	/**
+	 * @param licensePlate
+	 * @param truckModel
+	 * @param maxWeight
+	 */
 	public StandardTruck(String licensePlate,String truckModel,int maxWeight) {
 		super(licensePlate, truckModel);
 		this.maxWeight = maxWeight;
@@ -22,6 +36,9 @@ public class StandardTruck extends Truck {
 		System.out.println("Creating " + toString());
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -41,22 +58,37 @@ public class StandardTruck extends Truck {
 		return true;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getMaxWeight() {
 		return maxWeight;
 	}
 
+	/**
+	 * @param maxWeight
+	 */
 	public void setMaxWeight(int maxWeight) {
 		this.maxWeight = maxWeight;
 	}
 
+	/**
+	 * @return
+	 */
 	public Branch getDestination() {
 		return destination;
 	}
 
+	/**
+	 * @param destination
+	 */
 	public void setDestination(Branch destination) {
 		this.destination = destination;
 	}
 	
+	/**
+	 *
+	 */
 	public void work() {
 		if (!isAvailable())
 			setTimeLeft(getTimeLeft()-1);
@@ -100,18 +132,30 @@ public class StandardTruck extends Truck {
 		}
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void collectPackage(Package p) {
 		p.addTracking(this, p.getStatus());
 		addPackage(p);
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void deliverPackage(Package p) {
 		p.addTracking(destination, p.getStatus());
 		destination.addPackage(p);
 	}
 
+	/**
+	 * @param p
+	 * @param currentWeight
+	 * @param status
+	 * @return
+	 */
 	public boolean checkCapacityAdd(Package p, int currentWeight, Status status) {
 		double temp;
 		if (p instanceof SmallPackage && (1 + currentWeight <= getMaxWeight())) 
@@ -126,15 +170,24 @@ public class StandardTruck extends Truck {
 		return true;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		return "StandardTruck " + super.toString();
 	}
 	
+	/**
+	 *
+	 */
 	public String getSimpleName() {
 		return "StandardTruck";
 	}
 	
+	/**
+	 *
+	 */
 	protected String truckCharacteristics() {
 		return ", maxWeight=" + getMaxWeight();
 	}

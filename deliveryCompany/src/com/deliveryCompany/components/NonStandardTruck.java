@@ -3,10 +3,22 @@ package com.deliveryCompany.components;
 import java.util.Random;
 
 public class NonStandardTruck extends Truck {
+	/**
+	 * 
+	 */
 	private int width;
+	/**
+	 * 
+	 */
 	private int length;
+	/**
+	 * 
+	 */
 	private int height;
 	
+	/**
+	 * 
+	 */
 	public NonStandardTruck () {
 		super();
 		Random rand = new Random();
@@ -19,6 +31,13 @@ public class NonStandardTruck extends Truck {
 
 	}
 	
+	/**
+	 * @param licensePlate
+	 * @param truckModel
+	 * @param length
+	 * @param width
+	 * @param height
+	 */
 	public NonStandardTruck(String licensePlate, String truckModel, int length, int width, int height) {
 		super(licensePlate, truckModel);
 		this.length = length;
@@ -27,6 +46,9 @@ public class NonStandardTruck extends Truck {
 		System.out.println("Creating " + toString());
 	}
 
+	/**
+	 *
+	 */
 	public void work() {
 		if(!isAvailable()) {
 			setTimeLeft(getTimeLeft()-1);
@@ -43,6 +65,9 @@ public class NonStandardTruck extends Truck {
 		}
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void collectPackage(Package p) {
 		p.setStatus(Status.DISTRIBUTION);
@@ -53,6 +78,9 @@ public class NonStandardTruck extends Truck {
 				p.getPackageID(), getTimeLeft());
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void deliverPackage(Package p) {
 		p.setStatus(Status.DELIVERED);
@@ -67,20 +95,32 @@ public class NonStandardTruck extends Truck {
 		this.setAvailable(true);
 	}
 	
+	/**
+	 * @return
+	 */
 	public int calcTime() {
 		return ((Math.abs(getLastPack().getSenderAddress().getStreet()
 				- getLastPack().getDestinationAddress().getStreet()) / 10) % 10) + 1;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		return "NonStandardTruck " + super.toString();
 	}
 
+	/**
+	 *
+	 */
 	public String getSimpleName() {
 		return "NonStandardTruck";
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -99,30 +139,51 @@ public class NonStandardTruck extends Truck {
 		return true;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getWidth() {
 		return width;
 	}
 
+	/**
+	 * @param width
+	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getLength() {
 		return length;
 	}
 
+	/**
+	 * @param length
+	 */
 	public void setLength(int length) {
 		this.length = length;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getHeight() {
 		return height;
 	}
 
+	/**
+	 * @param height
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
 	
+	/**
+	 *
+	 */
 	protected String truckCharacteristics() {
 		return ", length=" + getLength() + ", width=" + getWidth() + ", height=" + getHeight() ;
 	}

@@ -4,15 +4,27 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Hub extends Branch {
+	/**
+	 * 
+	 */
 	private ArrayList<Branch> branches;
+	/**
+	 * 
+	 */
 	private int currentBranch;
 	
+	/**
+	 * 
+	 */
 	public Hub() {
 		super("HUB");
 		branches = new ArrayList<Branch>();
 		currentBranch = 0;
 	}
 	
+	/**
+	 *
+	 */
 	public void work() {
 		for (Truck truck : getListTrucks()) {
 			truck.work();
@@ -65,12 +77,18 @@ public class Hub extends Branch {
 			branch.work();
 	}
 	
+	/**
+	 * @return
+	 */
 	public int nextBranch() {
 		if (currentBranch + 1 >= branches.size())
 			currentBranch = 0;
 		return currentBranch++;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,6 +97,9 @@ public class Hub extends Branch {
 		return result;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -96,34 +117,59 @@ public class Hub extends Branch {
 		return true;
 	}
 	
+	/**
+	 * @param index
+	 * @return
+	 */
 	public Branch getBranch(int index) {
 		return branches.get(index);
 	}
 
+	/**
+	 * @return
+	 */
 	public ArrayList<Branch> getBranches() {
 		return branches;
 	}
 
+	/**
+	 * @param branches
+	 */
 	public void setBranches(ArrayList<Branch> branches) {
 		this.branches = branches;
 	}
 
+	/**
+	 * 
+	 */
 	public void addBranch() {
 		branches.add(new Branch());
 	}
 	
+	/**
+	 * @param branchName
+	 */
 	public void addBranch(String branchName) {
 		branches.add(new Branch(branchName));
 	}
 	
+	/**
+	 * @param branch
+	 */
 	public void addBranch(Branch branch) {
 		branches.add(branch);
 	}
 	
+	/**
+	 * 
+	 */
 	public void addTruck() {
 		super.addTruck(new StandardTruck());
 	}
 	
+	/**
+	 *
+	 */
 	public void addTrucks(int amount) {
 		for (int i = 0; i < amount; ++i)
 			addTruck(new StandardTruck());

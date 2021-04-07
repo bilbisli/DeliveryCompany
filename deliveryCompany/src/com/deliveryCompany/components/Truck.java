@@ -3,14 +3,38 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public abstract class Truck implements Node {
+	/**
+	 * 
+	 */
 	static private int nextId = 2000; 
+	/**
+	 * 
+	 */
 	private int truckID;
+	/**
+	 * 
+	 */
 	private final String licensePlate;
+	/**
+	 * 
+	 */
 	private final String truckModel;
+	/**
+	 * 
+	 */
 	private boolean available;
+	/**
+	 * 
+	 */
 	private int timeLeft;
+	/**
+	 * 
+	 */
 	private ArrayList<Package> packages;
 	
+	/**
+	 * 
+	 */
 	public Truck() {
 		truckID = nextId++;	
 		Random rand = new Random();
@@ -21,6 +45,10 @@ public abstract class Truck implements Node {
 		licensePlate = generateLicensePlate();
 	}
 	
+	/**
+	 * @param licensePlate
+	 * @param truckModel
+	 */
 	public Truck(String licensePlate, String truckModel) {
 		this.licensePlate = licensePlate;
 		this.truckModel = truckModel;
@@ -30,83 +58,158 @@ public abstract class Truck implements Node {
 		timeLeft = 0;
 	}
 	
+	/**
+	 *
+	 */
+	public void collectPackage(Package p) {
+		
+	}
+	/**
+	 *
+	 */
+	public void deliverPackage(Package p) {
+		
+	}
+	
+	/**
+	 * @return
+	 */
 	public int getnextId() {
 		return nextId;
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getTruckID() {
 		return truckID;
 	}
 
+	/**
+	 * @param truckID
+	 */
 	public void setTruckID(int truckID) {
 		this.truckID = truckID;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getLicensePlate() {
 		return licensePlate;
 	}
 
 
+	/**
+	 * @return
+	 */
 	public String getTruckModel() {
 		return truckModel;
 	}
 
+	/**
+	 * @return
+	 */
 	public boolean isAvailable() {
 		return available;
 	}
 
+	/**
+	 * @param available
+	 */
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
 
+	/**
+	 * @return
+	 */
 	public int getTimeLeft() {
 		return timeLeft;
 	}
 
+	/**
+	 * @param timeLeft
+	 */
 	public void setTimeLeft(int timeLeft) {
 		this.timeLeft = timeLeft;
 	}
 
+	/**
+	 * @return
+	 */
 	public ArrayList<Package> getPackages() {
 		return packages;
 	}
 
+	/**
+	 * @param packages
+	 */
 	public void setPackages(ArrayList<Package> packages) {
 		this.packages = packages;
 	}
 	
+	/**
+	 * @return
+	 */
 	public Package getLastPack() {
 		return packages.get(packages.size() - 1);
 	}
 	
+	/**
+	 * @param index
+	 * @param p
+	 */
 	public void addPackage(int index, Package p) {
 		packages.add(index, p);
 	}
 	
+	/**
+	 * @param p
+	 */
 	public void addPackage(Package p) {
 		packages.add(p);
 	}
 	
+	/**
+	 * @param packs
+	 */
 	public void addPackages(Object packs) {
 		packages.addAll((ArrayList<Package>) packs);
 	}
 	
+	/**
+	 * @param index
+	 * @param packs
+	 */
 	public void addPackages(int index, Object packs) {
 		packages.addAll(index, (ArrayList<Package>) packs);
 	}
 	
+	/**
+	 * @param index
+	 */
 	public void removePackage(int index) {
 		packages.remove(index);
 	}
 	
+	/**
+	 * @param p
+	 */
 	public void removePackage(Package p) {
 		packages.remove(p);
 	}
 	
+	/**
+	 * 
+	 */
 	public void removePackages() {
 		packages.clear();
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -120,6 +223,9 @@ public abstract class Truck implements Node {
 		return result;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -153,6 +259,9 @@ public abstract class Truck implements Node {
 		return true;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		return "[truckID=" + truckID + ", licensePlate=" + licensePlate + ", truckModel=" + truckModel 
@@ -160,15 +269,24 @@ public abstract class Truck implements Node {
 		
 	}
 	
+	/**
+	 * @return
+	 */
 	protected String truckCharacteristics() {
 		return "";
 	}
 
+	/**
+	 * @return
+	 */
 	public String generateLicensePlate() {
 		int n = 10000000 + new Random().nextInt(100000000);
 		return  n / 100000 + "-" + (n % 100000)/1000 + "-" + n % 1000 ;
 	}
 
+	/**
+	 * @return
+	 */
 	public String getSimpleName() {
 		return "Truck";
 	}	

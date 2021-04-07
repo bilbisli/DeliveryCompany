@@ -3,14 +3,40 @@ package com.deliveryCompany.components;
 import java.util.ArrayList;
 
 public abstract class Package {
+	/**
+	 * 
+	 */
 	private static int nextId = 1000;
+	/**
+	 * 
+	 */
 	private final int packageID;
+	/**
+	 * 
+	 */
 	private Priority priority;
+	/**
+	 * 
+	 */
 	private Status status;
+	/**
+	 * 
+	 */
 	private final Address senderAddress;
+	/**
+	 * 
+	 */
 	private final Address destinationAddress;
+	/**
+	 * 
+	 */
 	private ArrayList<Tracking> tracking;
 	
+	/**
+	 * @param priority
+	 * @param senderAddress
+	 * @param destinationAddress
+	 */
 	public Package (Priority priority, Address senderAddress, Address destinationAddress) {
 		this.packageID = nextId++;
 		this.priority = priority;
@@ -21,16 +47,26 @@ public abstract class Package {
 		status = Status.CREATION;
 	}
 	
+	/**
+	 * @param node
+	 * @param status
+	 */
 	public void addTracking (Node node, Status status) {
 		tracking.add(new Tracking(MainOffice.getClock(), node, status));
 	}
 	
+	/**
+	 * 
+	 */
 	public void printTracking() {
 		System.out.println("TRACKING " + toString());
 		for (Tracking track : tracking)
 			System.out.println(track);
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		return String.format(getSimpleName() + " [packageID=%d, priority=%s, status=%s, startTime=%s, senderAddress=%s, destinationAddress=%s, %s]",
@@ -38,10 +74,16 @@ public abstract class Package {
 				destinationAddress.addressString(), packCharacteristics());
 	}
 	
+	/**
+	 * @return
+	 */
 	public String getSimpleName() {
 		return "Package";
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -55,6 +97,9 @@ public abstract class Package {
 		return result;
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -88,49 +133,85 @@ public abstract class Package {
 		return true;
 	}
 	
+	/**
+	 * @return
+	 */
 	public static int getNextId() {
 		return nextId;
 	}
 	
+	/**
+	 * @return
+	 */
 	public int getPackageID() {
 		return packageID;
 	}
 	
+	/**
+	 * @return
+	 */
 	public Priority getPriority() {
 		return priority;
 	}
 	
+	/**
+	 * @param priority
+	 */
 	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
 	
+	/**
+	 * @return
+	 */
 	public Status getStatus() {
 		return status;
 	}
 	
+	/**
+	 * @param status
+	 */
 	public void setStatus(Status status) {
 		this.status = status;
 	}
 	
+	/**
+	 * @return
+	 */
 	public ArrayList<Tracking> getTracking() {
 		return tracking;
 	}
 	
+	/**
+	 * @param tracking
+	 */
 	public void setTracking(ArrayList<Tracking> tracking) {
 		this.tracking = tracking;
 	}
 	
+	/**
+	 * @return
+	 */
 	public Address getSenderAddress() {
 		return senderAddress;
 	}
 	
+	/**
+	 * @return
+	 */
 	public Address getDestinationAddress() {
 		return destinationAddress;
 	}
 	
+	/**
+	 * @return
+	 */
 	public Tracking getLastTrack() {
 		return tracking.get(tracking.size() - 1);
 	}
 	
+	/**
+	 * @return
+	 */
 	protected abstract String packCharacteristics();
 }

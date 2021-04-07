@@ -1,16 +1,26 @@
 package com.deliveryCompany.components;
 
 public class Van extends Truck {
+	/**
+	 * 
+	 */
 	public Van() {
 		super();
 		System.out.println("Creating " + toString());
 	}
 	
+	/**
+	 * @param licensePlate
+	 * @param truckModel
+	 */
 	public Van(String licensePlate, String truckModel) {
 		super(licensePlate, truckModel);
 		System.out.println("Creating " + toString());
 	}
 	
+	/**
+	 *
+	 */
 	public void work() {
 		if(!isAvailable()) {
 			setTimeLeft(getTimeLeft()-1);
@@ -26,6 +36,9 @@ public class Van extends Truck {
 		}
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public void collectPackage(Package p) {
 		p.setStatus(Status.BRANCH_STORAGE);
@@ -36,6 +49,9 @@ public class Van extends Truck {
 		setAvailable(true);
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public void deliverPackage(Package p) {
 		p.setStatus(Status.DELIVERED);
@@ -50,11 +66,17 @@ public class Van extends Truck {
 		removePackage(p);
 	}
 	
+	/**
+	 *
+	 */
 	@Override
 	public String toString() {
 		return "Van " + super.toString();
 	}
 	
+	/**
+	 *
+	 */
 	public String getSimpleName() {
 		return "Van";
 	}
