@@ -1,41 +1,49 @@
 package com.deliveryCompany.components;
 
+/**
+ * A general type represents packages.
+ * @version 1.00 7 Apr 2021
+ * @author  Ofir
+ * @see  	SmallPackage, StandardPackage, NonStandardPackage
+ */
+
 import java.util.ArrayList;
 
 public abstract class Package {
 	/**
-	 * 
+	 * Represents the following Package number
 	 */
 	private static int nextId = 1000;
 	/**
-	 * 
+	 * Represents the Package ID number
 	 */
 	private final int packageID;
 	/**
-	 * 
+	 * Represents the priority of the package
 	 */
 	private Priority priority;
 	/**
-	 * 
+	 * Represents the status of the package
 	 */
 	private Status status;
 	/**
-	 * 
+	 * Represents the sender Address
 	 */
 	private final Address senderAddress;
 	/**
-	 * 
+	 * Represents the destination Address
 	 */
 	private final Address destinationAddress;
 	/**
-	 * 
+	 * Represents collection of records with transfer history
 	 */
 	private ArrayList<Tracking> tracking;
 	
 	/**
-	 * @param priority
-	 * @param senderAddress
-	 * @param destinationAddress
+	 * Contractor who accepts as arguments arguments, addresses the sender and receives a package.
+	 * @param priority - the priority of the package
+	 * @param senderAddress - the sender address
+	 * @param destinationAddress - the destination address
 	 */
 	public Package (Priority priority, Address senderAddress, Address destinationAddress) {
 		this.packageID = nextId++;
@@ -48,15 +56,17 @@ public abstract class Package {
 	}
 	
 	/**
-	 * @param node
-	 * @param status
+	 * Receives an object of type Node and a Status object, creates and adds an object
+	   of the Tracking class to the tracking collection in the class
+	 * @param node - vehicle or branch
+	 * @param status - the status of the vehicle or the branch
 	 */
 	public void addTracking (Node node, Status status) {
 		tracking.add(new Tracking(MainOffice.getClock(), node, status));
 	}
 	
 	/**
-	 * 
+	 * Prints the records stored in the tracking collection
 	 */
 	public void printTracking() {
 		System.out.println("TRACKING " + toString());
@@ -65,7 +75,7 @@ public abstract class Package {
 	}
 	
 	/**
-	 *
+	 * The function returns the string representation of the object.
 	 */
 	@Override
 	public String toString() {
@@ -75,30 +85,16 @@ public abstract class Package {
 	}
 	
 	/**
-	 * @return
+	 * A function that returns the class name
+	 * @return the name of the class
 	 */
 	public String getSimpleName() {
 		return "Package";
 	}
 	
-	/**
-	 *
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((destinationAddress == null) ? 0 : destinationAddress.hashCode());
-		result = prime * result + packageID;
-		result = prime * result + ((priority == null) ? 0 : priority.hashCode());
-		result = prime * result + ((senderAddress == null) ? 0 : senderAddress.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((tracking == null) ? 0 : tracking.hashCode());
-		return result;
-	}
 	
 	/**
-	 *
+	 *The function checks whether the two Package objects are equal
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -134,84 +130,96 @@ public abstract class Package {
 	}
 	
 	/**
-	 * @return
+	 * The function returns the following package number
+	 * @return the following package number
 	 */
 	public static int getNextId() {
 		return nextId;
 	}
 	
 	/**
-	 * @return
+	 * The function returns the package ID
+	 * @return the package ID
 	 */
 	public int getPackageID() {
 		return packageID;
 	}
 	
 	/**
-	 * @return
+	 * The function returns the package priority
+	 * @return the priority of the package
 	 */
 	public Priority getPriority() {
 		return priority;
 	}
 	
 	/**
-	 * @param priority
+	 * The function sets the value of the priority
+	 * @param Priority - The Priority which we want to update the entry
 	 */
 	public void setPriority(Priority priority) {
 		this.priority = priority;
 	}
 	
 	/**
-	 * @return
+	 * The function returns the package's status
+	 * @return the status of the package
 	 */
 	public Status getStatus() {
 		return status;
 	}
 	
 	/**
-	 * @param status
+	 * The function sets the value of the status
+	 * @param Priority - The status which we want to update the entry
 	 */
 	public void setStatus(Status status) {
 		this.status = status;
 	}
 	
 	/**
-	 * @return
+	 * The function returns the tracking of the package
+	 * @return the tracking of the package
 	 */
 	public ArrayList<Tracking> getTracking() {
 		return tracking;
 	}
 	
 	/**
-	 * @param tracking
+	 * The function sets the value of the tracking
+	 * @param tracking - The tracking which we want to update the list
 	 */
 	public void setTracking(ArrayList<Tracking> tracking) {
 		this.tracking = tracking;
 	}
 	
 	/**
-	 * @return
+	 * The function returns the sender address of the package
+	 * @return the sender address of the package
 	 */
 	public Address getSenderAddress() {
 		return senderAddress;
 	}
 	
 	/**
-	 * @return
+	 * The function returns the destination address of the package
+	 * @return the destination address of the package
 	 */
 	public Address getDestinationAddress() {
 		return destinationAddress;
 	}
 	
 	/**
-	 * @return
+	 * The function returns the last track of the package
+	 * @return the last track of the package
 	 */
 	public Tracking getLastTrack() {
 		return tracking.get(tracking.size() - 1);
 	}
 	
 	/**
-	 * @return
+	 * The function returns the string representation of the object.
+	 * @return the string representation of the object
 	 */
 	protected abstract String packCharacteristics();
 }

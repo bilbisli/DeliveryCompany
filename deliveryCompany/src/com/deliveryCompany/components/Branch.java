@@ -2,30 +2,41 @@ package com.deliveryCompany.components;
 
 import java.util.ArrayList;
 
+/**
+ * Describes a local branch. Maintains a list of packages stored at the branch or intended for collection
+ * from the sender's address to this branch, and a list of vehicles that collect the packages from the 
+ * sending customers and deliver the packages to the receiving customers.
+ * @version 1.00 7 Apr 2021
+ * @author  Ofir
+ * @see  	Node
+ */
+
 public class Branch implements Node {
 	/**
-	 * 
+	 * Represents the following branch number
 	 */
 	private static int nextId = -1; 
 	/**
-	 * 
+	 * Represents the branch number
 	 */
 	private final int branchId;
 	/**
-	 * 
+	 * Represents the branch Name.
 	 */
 	private String branchName;
 	/**
-	 * 
+	 * A collection of packages that are in the branch and packages that must be
+	 *  collected are shipped by this branch.
 	 */
 	private ArrayList <Package> listPackages;
 	/**
-	 * 
+	 * A collection of vehicles belonging to this branch
 	 */
 	private ArrayList <Truck> listTrucks;
 	
 	/**
-	 * 
+	 * difficult contractor Calculates the serial number of the branch and creates the name of the branch,
+	 *  initializing the two remaining fields to empty collections.
 	 */
 	public Branch() {
 		branchId = nextId++;
@@ -36,6 +47,8 @@ public class Branch implements Node {
 	}
 	
 	/**
+	 * regular contractor Who gets a branch name, calculates the serial number of the branch,
+	 *  the two remaining fields are initialized to empty collections.
 	 * @param branchName
 	 */
 	public Branch(String branchName) {
@@ -47,7 +60,12 @@ public class Branch implements Node {
 	}
 	
 	/**
-	 *
+	 * The function checks for each package that is in the branch,
+		if it is in the waiting status for collection from a customer, an attempt is made to collect - if there is
+		a vehicle available, he goes out to collect the package. The calculation of the travel time and the
+		value obtained is updated in the vehicle in the timeLeft field and the condition of the vehicle changes
+		to "not available". Same goes for any package waiting for distribution, if there is a vehicle available,
+		it is sent to deliver the package.
 	 */
 	public void work() {
 		for (Truck truck : listTrucks)
@@ -69,15 +87,16 @@ public class Branch implements Node {
 	}
 	
 	/**
-	 * @param address
-	 * @return
+	 * The function represents the Route time of a vehicle
+	 * @param address - Parameter in the calculation of Route time
+	 * @return the Route time
 	 */
 	public int calcRouteTime(Address address) {
 		return (address.getStreet() / 10) % 10 + 1;
 	}
 
 	/**
-	 *
+	 * A method that handles the collection / receipt of a package
 	 */
 	@Override
 	public void collectPackage(Package p) {
@@ -86,26 +105,22 @@ public class Branch implements Node {
 	}
 
 	/**
-	 *
+	 * A method that handles the delivery of the package to the next person in the transfer chain.
 	 */
 	@Override
 	public void deliverPackage(Package p) {
 		checkMovePackage(p, Status.DISTRIBUTION, p.getDestinationAddress());
 	}
 	
-	/**
-	 * @param pack
-	 */
-	public void checkAddTrack(Package pack) {
-		if (!pack.getLastTrack().getNode().equals(this))
-			pack.addTracking(this, Status.BRANCH_STORAGE);
-	}
 	
 	/**
-	 * @param p
-	 * @param status
-	 * @param address
-	 * @return
+	 * The function checks the trucks in the list, if the truck is free, changing the status of the package,
+		adding to the transfer history, changing the availability of the truck, adding the package to the truck
+		and updating the time left
+	 * @param p - The package we want to add
+	 * @param status - The status we want to change for the package
+	 * @param address - The address that will help us calculate the time left
+	 * @return The truck was available
 	 */
 	public Truck checkMovePackage(Package p, Status status, Address address) {
 		for (Truck truck : listTrucks)
@@ -120,22 +135,9 @@ public class Branch implements Node {
 		return null;
 	}
 	
-	/**
-	 *
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + branchId;
-		result = prime * result + ((branchName == null) ? 0 : branchName.hashCode());
-		result = prime * result + ((listPackages == null) ? 0 : listPackages.hashCode());
-		result = prime * result + ((listTrucks == null) ? 0 : listTrucks.hashCode());
-		return result;
-	}
 
 	/**
-	 *
+	 * The function returns the string representation of the object.
 	 */
 	@Override
 	public String toString() {
@@ -144,7 +146,7 @@ public class Branch implements Node {
 	}
 
 	/**
-	 *
+	 * The function checks whether the two Branch objects are equal
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -176,122 +178,140 @@ public class Branch implements Node {
 	}
 
 	/**
-	 * @return
+	 * The function returns the following branch number
+	 * @return the following branch number
 	 */
 	public static int getNextId() {
 		return nextId;
 	}
 
 	/**
-	 * @return
+	 * The function return the Branch Name
+	 * @return branch Name
 	 */
 	public String getBranchName() {
 		return branchName;
 	}
 
 	/**
-	 * @param branchName
+	 * The function sets the value of the branch Name
+	 * @param branchName - the name that we want to entry
 	 */
 	public void setBranchName(String branchName) {
 		this.branchName = branchName;
 	}
 
 	/**
-	 * @return
+	 * The function return the ListTrucks
+	 * @return the List Trucks
 	 */
 	public ArrayList<Truck> getListTrucks() {
 		return listTrucks;
 	}
 
 	/**
-	 * @param listTrucks
+	 * The function sets the value of the setListTrucks
+	 * @param listTrucks - The list with which we want to update the entry
 	 */
 	public void setListTrucks(ArrayList<Truck> listTrucks) {
 		this.listTrucks = listTrucks;
 	}
 
 	/**
-	 * @return
+	 * The function return the ListPackages
+	 * @return  the List Packages
 	 */
 	public ArrayList<Package> getListPackages() {
 		return listPackages;
 	}
 
 	/**
-	 * @param listPackages
+	 * The function sets the value of the ListPackages
+	 * @param listPackages - The list with which we want to update the entry
 	 */
 	public void setListPackages(ArrayList<Package> listPackages) {
 		this.listPackages = listPackages;
 	}
 
 	/**
-	 * @return
+	 * The function returns the branch number
+	 * @return the branch number
 	 */
 	public int getBranchId() {
 		return branchId;
 	}
 	
 	/**
-	 * @param index
-	 * @param p
+	 * A function adds package to the packages array By index
+	 * @param index - Where do we want to add the package
+	 * @param p - The package we want to add
 	 */
 	public void addPackage(int index, Package p) {
 		listPackages.add(index, p);
 	}
 	
 	/**
-	 * @param p
+	 * A function adds package to the packages list
+	 * @param p - The package we want to add to the packages list
 	 */
 	public void addPackage(Package p) {
 		listPackages.add(p);
 	}
 	
 	/**
-	 * @param packs
+	 * A function adds the number of packages to the packages list
+	 * @param packs - The packages we want to add to the packages list
 	 */
 	public void addPackages(Object packs) {
 		listPackages.addAll((ArrayList<Package>) packs);
 	}
 	
 	/**
-	 * @param index
-	 * @param packs
+	 * A function adds the number of packages to the packages list
+	 * @param index - Where do we want to add the packages
+	 * @param packs - The packages we want to add to the packages list
 	 */
 	public void addPackages(int index, Object packs) {
 		listPackages.addAll(index, (ArrayList<Package>) packs);
 	}
 	
 	/**
-	 * @param index
+	 * The function receives a package and removes it according to a specific index from the list of packages
+	 * @param index - The location of the package we want to remove
 	 */
 	public void removePackage(int index) {
 		listPackages.remove(index);
 	}
 	
 	/**
-	 * @param p
+	 * The function receives a package and removes it from the list of packages
+	 * @param p - The package we want to delete from the package list
 	 */
 	public void removePackage(Package p) {
 		listPackages.remove(p);
 	}
 	
 	/**
-	 * @param index
-	 * @param t
+	 * The function adds a truck to the truck list
+	 * @param index - Where do we want to add the truck
+	 * @param t - The truck we want to add
 	 */
 	public void addTruck(int index, Truck t) {
 		listTrucks.add(index, t);
 	}
 	
 	/**
-	 * @param t
+	 * The function adds a truck to the truck list
+	 * @param t - truck that we want to remove
 	 */
 	public void addTruck(Truck t) {
 		listTrucks.add(t);
 	}
 	
 	/**
-	 * @param amount
+	 * The function adds a number of trucks according to the quantity it receives in the truck list.
+	 * @param amount - The amount of trucks you want to add
+	 * 			 
 	 */
 	public void addTrucks(int amount) {
 		for (int i = 0; i < amount; ++i)
@@ -299,21 +319,24 @@ public class Branch implements Node {
 	}
 	
 	/**
-	 * @param index
+	 * A function that receives a truck and removes it from the list of trucks according to a specific index.
+	 * @param index - A specific index where we want to remove trucks
 	 */
 	public void removeTruck(int index) {
 		listTrucks.remove(index);
 	}
 	
 	/**
-	 * @param t
+	 * A function that receives a truck and removes it from the list of trucks.
+	 * @param t - truck that we want to remove
 	 */
 	public void removeTruck(Truck t) {
 		listTrucks.remove(t);
 	}
 
 	/**
-	 * @return
+	 * A function that returns the class name
+	 * @return the name of the class
 	 */
 	public String getSimpleName() {
 		return "Branch";

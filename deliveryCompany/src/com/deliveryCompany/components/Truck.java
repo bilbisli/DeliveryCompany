@@ -2,38 +2,45 @@ package com.deliveryCompany.components;
 import java.util.Random;
 import java.util.ArrayList;
 
+/**
+ * Department representing the vehicles for transporting packages.
+ * @version 1.00 7 Apr 2021
+ * @author  Ofir
+ * @see  	Package
+ */
+
 public abstract class Truck implements Node {
 	/**
-	 * 
+	 * Represents the following truck number
 	 */
 	static private int nextId = 2000; 
 	/**
-	 * 
+	 * Vehicle serial number
 	 */
 	private int truckID;
 	/**
-	 * 
+	 * Vehicle ID number
 	 */
 	private final String licensePlate;
 	/**
-	 * 
+	 * Model of vehicle
 	 */
 	private final String truckModel;
 	/**
-	 * 
+	 * Vehicle availability
 	 */
 	private boolean available;
 	/**
-	 * 
+	 * Time left until the end of the transport
 	 */
 	private int timeLeft;
 	/**
-	 * 
+	 * List of packages for transportation that are in the vehicle
 	 */
 	private ArrayList<Package> packages;
 	
 	/**
-	 * 
+	 * A random default Contractor that produces an object with a license plate and model of a vehicle at random.
 	 */
 	public Truck() {
 		truckID = nextId++;	
@@ -46,8 +53,9 @@ public abstract class Truck implements Node {
 	}
 	
 	/**
-	 * @param licensePlate
-	 * @param truckModel
+	 * A Contractor who receives as arguments a number plate and model of the vehicle and produces an object.
+	 * @param licensePlate - Vehicle ID number
+	 * @param truckModel - Model of vehicle
 	 */
 	public Truck(String licensePlate, String truckModel) {
 		this.licensePlate = licensePlate;
@@ -58,42 +66,34 @@ public abstract class Truck implements Node {
 		timeLeft = 0;
 	}
 	
-	/**
-	 *
-	 */
-	public void collectPackage(Package p) {
-		
-	}
-	/**
-	 *
-	 */
-	public void deliverPackage(Package p) {
-		
-	}
 	
 	/**
-	 * @return
+	 * The function returns the next Id of the truck
+	 * @return the next Id of the truck
 	 */
 	public int getnextId() {
 		return nextId;
 	}
 	
 	/**
-	 * @return
+	 * The function returns the Vehicle serial number 
+	 * @return the Vehicle serial number 
 	 */
 	public int getTruckID() {
 		return truckID;
 	}
 
 	/**
-	 * @param truckID
+	 * The function sets the value of the truck ID
+	 * @param TruckID - The truck ID  which we want to update the entry
 	 */
 	public void setTruckID(int truckID) {
 		this.truckID = truckID;
 	}
 
 	/**
-	 * @return
+	 * The function returns the license plate of the truck 
+	 * @return the vehicle serial number 
 	 */
 	public String getLicensePlate() {
 		return licensePlate;
@@ -101,130 +101,129 @@ public abstract class Truck implements Node {
 
 
 	/**
-	 * @return
+	 * The function returns the truck model of the truck 
+	 * @return the truck model number
 	 */
 	public String getTruckModel() {
 		return truckModel;
 	}
 
 	/**
-	 * @return
+	 * The function returns whether the vehicle is available or not
+	 * @return the available of the truck
 	 */
 	public boolean isAvailable() {
 		return available;
 	}
 
 	/**
-	 * @param available
+	 * The function sets the value of the available
+	 * @param available - The available which we want to update the entry
 	 */
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
 
 	/**
-	 * @return
+	 * The function returns the time left until the end of the transport
+	 * @return the time left
 	 */
 	public int getTimeLeft() {
 		return timeLeft;
 	}
 
 	/**
-	 * @param timeLeft
+	 * The function sets the value of the time left
+	 * @param TimeLeft - The time left which we want to update the entry
 	 */
 	public void setTimeLeft(int timeLeft) {
 		this.timeLeft = timeLeft;
 	}
 
 	/**
-	 * @return
+	 * the function returns the Packages of the truck
+	 * @return the Packages of the truck
 	 */
 	public ArrayList<Package> getPackages() {
 		return packages;
 	}
 
 	/**
-	 * @param packages
+	 * The function sets the value of the packages
+	 * @param packages - The packages which we want to update the entry
 	 */
 	public void setPackages(ArrayList<Package> packages) {
 		this.packages = packages;
 	}
 	
 	/**
-	 * @return
+	 * the function returns the Last Package
+	 * @return the Last Package
 	 */
 	public Package getLastPack() {
 		return packages.get(packages.size() - 1);
 	}
 	
 	/**
-	 * @param index
-	 * @param p
+	 * Add a package to the list of packages by index
+	 * @param index - the index that we want to add the package
+	 * @param p - the package that we want to add to the list
 	 */
 	public void addPackage(int index, Package p) {
 		packages.add(index, p);
 	}
 	
 	/**
-	 * @param p
+	 * Add a package to the list of packages
+	 * @param p - the package that we want to add to the list
 	 */
 	public void addPackage(Package p) {
 		packages.add(p);
 	}
 	
 	/**
-	 * @param packs
+	 * Adding multiple packages to an list
+	 * @param packs - the packs that we want to add to the list
 	 */
 	public void addPackages(Object packs) {
 		packages.addAll((ArrayList<Package>) packs);
 	}
 	
 	/**
-	 * @param index
-	 * @param packs
+	 * Adding multiple packages to an array by index
+	 * @param index - the index that we want to add the packages from the list
+	 * @param packs - the packs that we want to add to the list
 	 */
 	public void addPackages(int index, Object packs) {
 		packages.addAll(index, (ArrayList<Package>) packs);
 	}
 	
 	/**
-	 * @param index
+	 * The function removes the packet sent from the list by index
+	 * @param index - the index that we want to remove the package from the list
 	 */
 	public void removePackage(int index) {
 		packages.remove(index);
 	}
 	
 	/**
-	 * @param p
+	 * The function removes the packet sent from the list
+	 * @param p - the package that we want to remove
 	 */
 	public void removePackage(Package p) {
 		packages.remove(p);
 	}
 	
 	/**
-	 * 
+	 * removes all packages from the list
 	 */
 	public void removePackages() {
 		packages.clear();
 	}
 
-	/**
-	 *
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (available ? 1231 : 1237);
-		result = prime * result + ((licensePlate == null) ? 0 : licensePlate.hashCode());
-		result = prime * result + ((packages == null) ? 0 : packages.hashCode());
-		result = prime * result + timeLeft;
-		result = prime * result + truckID;
-		result = prime * result + ((truckModel == null) ? 0 : truckModel.hashCode());
-		return result;
-	}
 
 	/**
-	 *
+	 *The function checks whether the two Truck objects are equal
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -260,7 +259,7 @@ public abstract class Truck implements Node {
 	}
 
 	/**
-	 *
+	 *The function returns the string representation of the object.
 	 */
 	@Override
 	public String toString() {
@@ -270,14 +269,15 @@ public abstract class Truck implements Node {
 	}
 	
 	/**
-	 * @return
+	 * @return empty string
 	 */
 	protected String truckCharacteristics() {
 		return "";
 	}
 
 	/**
-	 * @return
+	 * the function calculates and return the License Plate of the truck
+	 * @return the License Plate of the truck
 	 */
 	public String generateLicensePlate() {
 		int n = 10000000 + new Random().nextInt(100000000);
@@ -285,7 +285,8 @@ public abstract class Truck implements Node {
 	}
 
 	/**
-	 * @return
+	 * A function that returns the class name
+	 * @return the name of the class
 	 */
 	public String getSimpleName() {
 		return "Truck";

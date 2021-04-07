@@ -1,26 +1,34 @@
 package com.deliveryCompany.components;
 
+/**
+ * Represents the non-standard size packages.
+ * @version 1.00 7 Apr 2021
+ * @author  Ofir
+ * @see  	Package
+ */
+
 public class NonStandardPackage extends Package {
 	/**
-	 * 
+	 * width of the package
 	 */
 	private final int width;
 	/**
-	 * 
+	 * length of the package
 	 */
 	private final int length;
 	/**
-	 * 
+	 * height of the package
 	 */
 	private final int height;
 	
 	/**
-	 * @param priority
-	 * @param senderAddress
-	 * @param destinationAddress
-	 * @param width
-	 * @param length
-	 * @param height
+	 * contractor that accepts priority arguments, sender and recipient addresses, and package dimensions.
+	 * @param priority - Represents the priority of the shipment
+	 * @param senderAddress - Represents the sender's address
+	 * @param destinationAddress - Represents the address to which the package is sent
+	 * @param width - Represents the width of the package
+	 * @param length - Represents the length of the package
+	 * @param height - Represents the height of the package
 	 */
 	public NonStandardPackage(Priority priority, Address senderAddress, Address destinationAddress, int width, int length, int height) {
 		super(priority, senderAddress, destinationAddress);
@@ -31,41 +39,31 @@ public class NonStandardPackage extends Package {
 	}
 
 	/**
-	 * @return
+	 * The function returns the width of the package
+	 * @return the width of the package
 	 */
 	public int getWidth() {
 		return width;
 	}
 
 	/**
-	 * @return
+	 * The function returns the length of the package
+	 * @return the length of the package
 	 */
 	public int getLength() {
 		return length;
 	}
 
 	/**
-	 * @return
+	 * The function returns the height of the package
+	 * @return the height of the package
 	 */
 	public int getHeight() {
 		return height;
 	}
 
 	/**
-	 *
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + height;
-		result = prime * result + length;
-		result = prime * result + width;
-		return result;
-	}
-
-	/**
-	 *
+	 *The function checks whether the two NonStandardPackage objects are equal
 	 */
 	@Override
 	public boolean equals(Object obj) {
@@ -86,7 +84,7 @@ public class NonStandardPackage extends Package {
 	}
 
 	/**
-	 *
+	 * The function returns the string representation of the dimensions.
 	 */
 	@Override
 	protected String packCharacteristics() {
@@ -94,7 +92,8 @@ public class NonStandardPackage extends Package {
 	}
 	
 	/**
-	 *
+	 * A function that returns the class name
+	 * @return the name of the class
 	 */
 	public String getSimpleName() {
 		return "NonStandardPackage";
