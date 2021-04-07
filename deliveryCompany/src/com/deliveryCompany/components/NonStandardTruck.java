@@ -1,4 +1,5 @@
 package com.deliveryCompany.components;
+import java.util.Random;
 
 /**
  * This class represents a non standard truck that collects and delivers non standard packages (one at a time)
@@ -7,8 +8,6 @@ package com.deliveryCompany.components;
  * @see		Package
  * @see		Truck
  */
-import java.util.Random;
-
 public class NonStandardTruck extends Truck {
 	/**
 	 * The trunk width of the truck
@@ -34,8 +33,6 @@ public class NonStandardTruck extends Truck {
 		height = 1 + rand.nextInt(400);
 
 		System.out.println("Creating " + toString());
-		
-
 	}
 	
 	/**

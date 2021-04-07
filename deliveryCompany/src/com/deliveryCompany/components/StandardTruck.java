@@ -134,9 +134,10 @@ public class StandardTruck extends Truck {
 				ArrayList<Package> tempPackages = new ArrayList<Package>();
 				for (Package pack : destination.getListPackages()) {
 					if(pack.getStatus() == Status.BRANCH_STORAGE) {
-						if (!checkCapacityAdd(pack, currentWeight, Status.HUB_TRANSPORT))
+						if (checkCapacityAdd(pack, currentWeight, Status.HUB_TRANSPORT))
+							tempPackages.add(pack);
+						if (currentWeight >= getMaxWeight())
 							break;
-						else tempPackages.add(pack);
 					}
 				}
 				destination.getListPackages().removeAll(tempPackages);
@@ -173,7 +174,7 @@ public class StandardTruck extends Truck {
 	 * @param p - the package that we want to check
 	 * @param currentWeight - current Weight of the package
 	 * @param status - the package status
-	 * @return
+	 * @return true if the package was loaded on the truck else false
 	 */
 	public boolean checkCapacityAdd(Package p, int currentWeight, Status status) {
 		double temp;

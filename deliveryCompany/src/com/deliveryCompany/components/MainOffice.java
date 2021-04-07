@@ -131,8 +131,8 @@ public class MainOffice {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Get method for packages field
+	 * @return the list of packages in the delivery company
 	 */
 	public ArrayList<Package> getPackages() {
 		return packages;

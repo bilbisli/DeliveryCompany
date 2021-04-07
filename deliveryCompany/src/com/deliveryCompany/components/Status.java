@@ -7,13 +7,40 @@ package com.deliveryCompany.components;
  * @see		Package
  */
 public enum Status {
+	/**
+	 * creation status
+	 */
 	CREATION,
+	/**
+	 * collection status
+	 */
 	COLLECTION,
+	/**
+	 * branch storage status
+	 */
 	BRANCH_STORAGE,
+	/**
+	 * hub transport status
+	 */
 	HUB_TRANSPORT,
+	/**
+	 * hub storage status
+	 */
 	HUB_STORAGE,
+	/**
+	 * branch transport status
+	 */
 	BRANCH_TRANSPORT,
+	/**
+	 * delivery status
+	 */
 	DELIVERY,
+	/**
+	 * distribution status
+	 */
 	DISTRIBUTION,
+	/**
+	 * delivered status
+	 */
 	DELIVERED
 }

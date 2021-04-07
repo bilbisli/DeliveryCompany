@@ -85,7 +85,7 @@ public abstract class Truck implements Node {
 
 	/**
 	 * The function sets the value of the truck ID
-	 * @param TruckID - The truck ID  which we want to update the entry
+	 * @param truckID - The truck ID  which we want to update the entry
 	 */
 	public void setTruckID(int truckID) {
 		this.truckID = truckID;
@@ -134,7 +134,7 @@ public abstract class Truck implements Node {
 
 	/**
 	 * The function sets the value of the time left
-	 * @param TimeLeft - The time left which we want to update the entry
+	 * @param timeLeft - The time left which we want to update the entry
 	 */
 	public void setTimeLeft(int timeLeft) {
 		this.timeLeft = timeLeft;

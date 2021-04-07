@@ -28,7 +28,7 @@ public class SmallPackage extends Package {
 	
 	/**
 	 * This method checks if a special notification needs to be sent when the package arrives to it's destination
-	 * @return
+	 * @return true or false based on acknowledge
 	 */
 	public boolean isAcknowledge() {
 		return acknowledge;

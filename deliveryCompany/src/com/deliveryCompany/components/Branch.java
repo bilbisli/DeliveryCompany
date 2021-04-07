@@ -49,7 +49,7 @@ public class Branch implements Node {
 	/**
 	 * regular contractor Who gets a branch name, calculates the serial number of the branch,
 	 *  the two remaining fields are initialized to empty collections.
-	 * @param branchName
+	 * @param branchName the specified name to give the newly created branch
 	 */
 	public Branch(String branchName) {
 		branchId = nextId++;

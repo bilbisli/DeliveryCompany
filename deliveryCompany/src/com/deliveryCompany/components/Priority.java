@@ -7,7 +7,16 @@ package com.deliveryCompany.components;
  * @see		Package
  */
 public enum Priority {
+	/**
+	 * low priority
+	 */
 	LOW,
+	/**
+	 * standard priority
+	 */
 	STANDARD,
+	/**
+	 * high priority
+	 */
 	HIGHT
 }

@@ -49,9 +49,10 @@ public class Hub extends Branch {
 					ArrayList<Package> tempPackages = new ArrayList<Package>();
 					for (Package pack : getListPackages()) {
 						if (pack.getDestinationAddress().getZip() == t.getDestination().getBranchId()) {
-							if(!t.checkCapacityAdd(pack, currentWeight, Status.BRANCH_TRANSPORT))
+							if(t.checkCapacityAdd(pack, currentWeight, Status.BRANCH_TRANSPORT))
+								tempPackages.add(pack);
+							if(currentWeight >= t.getMaxWeight())
 								break;
-							else tempPackages.add(pack);
 						}
 					}
 					getListPackages().removeAll(tempPackages);
@@ -66,6 +67,7 @@ public class Hub extends Branch {
 				}
 				else if (truck instanceof NonStandardTruck) {
 					NonStandardTruck t = (NonStandardTruck)truck;
+					ArrayList<Package> tempPacks = new ArrayList<Package>();
 					for (Package pack : getListPackages()) {
 						if (pack instanceof NonStandardPackage) {
 							NonStandardPackage p = (NonStandardPackage)pack;
@@ -76,13 +78,14 @@ public class Hub extends Branch {
 								t.addPackage(p);
 								t.setAvailable(false);
 								t.setTimeLeft(t.calcTime());
-								removePackage(p);
 								System.out.printf("NonStandartTruck %d is collecting package %d, time left: %d\n",t.getTruckID(), p.getPackageID(),
 										t.getTimeLeft());
+								tempPacks.add(p);
 								break;
 							}
 						}
 					}
+					getListPackages().removeAll(tempPacks);
 				}
 			}
 		}

@@ -1,14 +1,15 @@
 package com.deliveryCompany.components;
 
+import java.util.ArrayList;
+
 /**
  * A general type represents packages.
  * @version 1.00 7 Apr 2021
  * @author  Ofir
- * @see  	SmallPackage, StandardPackage, NonStandardPackage
+ * @see  	SmallPackage
+ * @see  	StandardPackage
+ * @see  	NonStandardPackage
  */
-
-import java.util.ArrayList;
-
 public abstract class Package {
 	/**
 	 * Represents the following Package number
@@ -155,7 +156,7 @@ public abstract class Package {
 	
 	/**
 	 * The function sets the value of the priority
-	 * @param Priority - The Priority which we want to update the entry
+	 * @param priority - The Priority which we want to update the entry
 	 */
 	public void setPriority(Priority priority) {
 		this.priority = priority;
@@ -171,7 +172,7 @@ public abstract class Package {
 	
 	/**
 	 * The function sets the value of the status
-	 * @param Priority - The status which we want to update the entry
+	 * @param status - The status which we want to update the entry
 	 */
 	public void setStatus(Status status) {
 		this.status = status;
