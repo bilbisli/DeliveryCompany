@@ -9,8 +9,8 @@ import java.util.Scanner;
  * This class represents a costumer of the delivery company
  * 
  * @version 3.00 12 July 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see Package
  * @see Address
  */

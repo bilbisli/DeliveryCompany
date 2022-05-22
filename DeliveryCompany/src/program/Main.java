@@ -6,8 +6,8 @@ import javax.swing.*;
  * This class represents the main frame that contains the visualization of the delivery company
  * 
  * @version 3.00 12 July 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see CreatePostSystemlDialog
  * @see Main
  * @see PostSystemPanel

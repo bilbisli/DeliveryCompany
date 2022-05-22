@@ -4,8 +4,8 @@ package components;
  * Represents the non-standard size packages.
  * 
  * @version 2.00 11 June 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see Package
  */
 public class NonStandardPackage extends Package {

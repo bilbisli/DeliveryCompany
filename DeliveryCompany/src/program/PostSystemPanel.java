@@ -17,8 +17,8 @@ import java.util.*;
  * This class represents a panel that commits visualization of the delivery company
  * 
  * @version 3.00 12 July 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see CreatePostSystemlDialog
  * @see Main
  */

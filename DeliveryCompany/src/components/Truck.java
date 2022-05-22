@@ -9,8 +9,8 @@ import java.util.Random;
  * the hub and the other branches
  * 
  * @version 2.00 11 June 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see Package
  */
 public abstract class Truck extends Observable implements Node, Cloneable {

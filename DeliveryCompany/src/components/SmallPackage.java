@@ -4,8 +4,8 @@ package components;
  * This class represents a small package
  * 
  * @version 2.00 12 June 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see Package
  */
 public class SmallPackage extends Package {

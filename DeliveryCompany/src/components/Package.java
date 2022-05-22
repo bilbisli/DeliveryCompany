@@ -9,20 +9,13 @@ import java.util.ArrayList;
  * A general type represents packages.
  * 
  * @version 2.00 12 June 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see SmallPackage
  * @see StandardPackage
  * @see NonStandardPackage
  */
-/**
- * @author bilbisli
- *
- */
-/**
- * @author bilbisli
- *
- */
+
 public abstract class Package implements Serializable {
 
 	private static final long serialVersionUID = 1L;

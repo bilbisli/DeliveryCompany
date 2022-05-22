@@ -12,8 +12,8 @@ import java.util.List;
  * deliver the packages to the receiving customers.
  * 
  * @version 3.00 12 July 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see Node
  */
 public class Branch extends Observable implements Node, Cloneable {

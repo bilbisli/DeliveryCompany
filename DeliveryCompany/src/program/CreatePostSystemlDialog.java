@@ -8,8 +8,8 @@ import java.awt.event.*;
  * This class represents the system creation option dialog
  * 
  * @version 3.00 12 July 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see PostSystemPanel
  */
 public class CreatePostSystemlDialog extends JDialog implements ActionListener {

@@ -5,8 +5,8 @@ package components;
  * creates states to save in the memory (memento)
  * 
  * @version 3.00 12 June 2021
- * @author Israel Avihail 308298363
- * @author Ofir Golan 315585323
+ * @author Israel Avihail
+ * @author Ofir Golan
  * @see Memento
  * @see CareTaker
  * @see MainOffice
