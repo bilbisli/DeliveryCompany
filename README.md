@@ -1,6 +1,7 @@
 # DeliveryCompany
 
 This project displays a concurrent delivery system simulation implemented using Design Patterns.
+* Docs are available in the doc folder (can be viewed by ```index.html```).
 
 ### Program Features:
 <ol>
